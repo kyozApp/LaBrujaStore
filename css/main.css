@@ -1,0 +1,8 @@
+/* Estilos para el contenido principal (main) */
+main {
+    background-color: chocolate; /* Color de fondo del área principal */
+    margin-top: 100px; /* Espacio superior desde la parte superior de la ventana */
+    min-height: calc(100vh - 100px); /* Altura mínima del main para ocupar el espacio restante */
+    display: flex; /* Usa un modelo de caja flexible */
+    flex-direction: column; /* Organiza los elementos en columna */
+}

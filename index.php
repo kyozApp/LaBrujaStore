@@ -6,22 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizaciones</title>
     <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/layout.css">
 </head>
 
 <body>
 
     <!-- Cabecera -->
     <header>
-        <a href="#"><img src="img/labrujastore.png" alt="Logo"></a>
-        <h1>menu</h1>
+        <a href="#" class="img"><img src="img/labrujastore.png" alt="Logo"></a>
+        <nav>
+            <ul>
+                <a href="#"><li>Cotizacion</li></a>
+                <a href="#"><li>Categoria</li></a>
+                <a href="view/login.php"><li>Iniciar Sesion</li></a>
+            </ul>
+        </nav>
     </header>
 
     <!-- Main -->
     <main>
-        <h1>Aqui es el main</h1>
+        <h1>Aqui es el maiaaan</h1>
     </main>
 
     <!-- Footer -->

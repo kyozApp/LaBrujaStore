@@ -1,0 +1,262 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/*HEADER*/
+#header {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.conte-header {
+    display: flex;
+}
+
+.div-busqueda {
+    display: none;
+    padding: 0;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+#header-img-logo {
+    margin-left: 50px;
+    padding: 10px;
+}
+
+#header-cont-img-logo,
+#header-img-logo-right {
+    height: 75px;
+}
+
+#header-img-logo-right {
+    display: none;
+}
+
+#header-botones {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.botones-cont {
+    padding: 7px;
+}
+
+.bloque-icon-tres-lineas {
+    display: none;
+    padding: 0;
+}
+
+.bloque-icon-tres-lineas:hover .opciones-lista {
+    display: block;
+}
+
+.opciones-lista {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+#icon-tres-lineas {
+    width: 30px;
+}
+
+.bloque-icon-lupa {
+    display: none;
+    padding: 0;
+}
+
+.botones-cont a {
+    padding: 8px 12px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.botones-cont a:hover {
+    background-color: #7e7e7e;
+}
+
+.dropdown:hover .categorias-lista {
+    display: block;
+}
+
+.categorias-lista {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 150px;
+}
+
+.cont-lista {
+    padding: 8px;
+    text-decoration: none;
+    color: #000000;
+    display: block;
+}
+
+.cont-lista:hover {
+    background-color: #f0f0f0;
+}
+
+.formulario-buscar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 4px;
+}
+
+.buscar-text {
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.buscar-text:focus {
+    outline: none;
+}
+
+.buscar-boton {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buscar-boton:hover {
+    background-color: #555;
+}
+
+#icon-lupa {
+    width: 30px;
+}
+
+.cont-sub-categorias:hover .opciones-sub-categoria {
+    display: block;
+}
+
+.cont-sub-categorias {
+    position: relative;
+}
+
+.opciones-sub-categoria {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    left: 100%;
+    /* Alinear a la derecha del elemento padre */
+    top: 0;
+}
+
+.bottom-busqueda {
+    display: none;
+    padding: 0;
+}
+
+.body-cont {
+    flex: 1; /* Hace que el contenido ocupe el espacio restante */
+    margin-top: 100px;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 970px) {
+    .btn-acion {
+        display: none;
+        padding: 0;
+    }
+
+    .bloque-icon-tres-lineas {
+        display: block;
+        margin-left: 15px;
+        padding: 0px;
+    }
+
+    #header-img-logo {
+        display: none;
+    }
+
+    #header-botones {
+        margin-left: 50px;
+    }
+
+    #header-img-logo-right {
+        display: block;
+        margin-right: 50px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .body-cont {
+        margin-top: 95px;
+    }
+}
+
+@media (max-width: 712px) {
+    #header {
+        flex-direction: column-reverse;
+    }
+
+    #header-img-logo-right {
+        margin-right: 0;
+        padding: 10px;
+    }
+
+    #header-botones {
+        padding-bottom: 10px;
+    }
+
+    .body-cont {
+        margin-top: 151px;
+    }
+}
+
+@media (max-width: 470px) {
+    #header-img-logo {
+        margin-left: 20px;
+    }
+
+    #header-botones {
+        margin: 0;
+    }
+
+    .bloque-icon-tres-lineas {
+        padding: 0px;
+    }
+}
+

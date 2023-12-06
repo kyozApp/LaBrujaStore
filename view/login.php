@@ -43,20 +43,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
+
     <form method="post" action="">
-        <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario" name="usuario" required>
+        <div class="wrapper">
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
+            <div class="user-container">
+                <label class="label-cont" for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required>
+            </div>
+            <div class="password-container">
+                <label class="label-cont" for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+                <span class="toggle-password" onclick="togglePassword()"><i class="fa-regular fa-eye"></i></span>
+            </div>
 
-        <button type="submit">Iniciar Sesión</button>
-        <a href="../index.php">Salir</a>
+            <button class="submit" type="submit">Iniciar Sesion</button>
+
+            <a href="../index.php" type="button" class="button">Salir</a>
+
+        </div>
+
     </form>
+
+    <script src="../js/login.js"></script>
+
 </body>
 
 </html>

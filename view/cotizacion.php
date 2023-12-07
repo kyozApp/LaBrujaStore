@@ -76,6 +76,7 @@
             <!-- Procesador -->
             <label for="procesador">Selecciona tu procesador:</label>
             <select id="procesador" name="procesador" onchange="cargarPlacasBase()">
+                <option value="" disabled selected>Selecciona tu procesador</option>
                 <option value="Ryzen 5 5500">Ryzen 5 5500</option>
                 <option value="Ryzen 5 5600G">Ryzen 5 5600G</option>
                 <option value="Intel 12400F">Intel 12400F</option>
@@ -85,14 +86,15 @@
             <!-- Placa Base -->
             <label for="placaBase">Selecciona tu placa base:</label>
             <select id="placaBase" name="placaBase" disabled>
+                <option value="" disabled selected>Selecciona tu placa base</option>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
             <img id="imagenPlaca" alt="Imagen de la placa">
 
-
             <!-- Memoria RAM -->
             <label for="memoriaRam">Selecciona tu memoria RAM:</label>
             <select id="memoriaRam" name="memoriaRam" disabled>
+                <option value="" disabled selected>Selecciona tu memoria RAM</option>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
             <img id="imagenMemoriaRam" alt="Imagen de la memoria RAM">
@@ -100,6 +102,7 @@
             <!-- Almacenamiento -->
             <label for="almacenamiento">Selecciona tu almacenamiento:</label>
             <select id="almacenamiento" name="almacenamiento" disabled>
+                <option value="" disabled selected>Selecciona tu almacenamiento</option>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
             <img id="imagenAlmacenamiento" alt="Imagen del almacenamiento">
@@ -107,6 +110,7 @@
             <!-- Tarjeta de Video -->
             <label for="tarjetaVideo">Selecciona tu tarjeta de video:</label>
             <select id="tarjetaVideo" name="tarjetaVideo" disabled>
+                <option value="" disabled selected>Selecciona tu tarjeta de video</option>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
             <img id="imagenTarjetaVideo" alt="Imagen de la tarjeta de video">
@@ -114,6 +118,7 @@
             <!-- Fuente de Poder -->
             <label for="fuentePoder">Selecciona tu fuente de poder:</label>
             <select id="fuentePoder" name="fuentePoder" disabled>
+                <option value="" disabled selected>Selecciona tu fuente de poder</option>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
             <img id="imagenFuentePoder" alt="Imagen de la fuente de poder">
@@ -121,6 +126,7 @@
             <!-- Case -->
             <label for="case">Selecciona tu case:</label>
             <select id="case" name="case" disabled>
+                <option value="" disabled selected>Selecciona tu case</option>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
             <img id="imagenCase" alt="Imagen del case">

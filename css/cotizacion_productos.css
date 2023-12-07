@@ -1,0 +1,36 @@
+/* Estilos para las imágenes junto a las opciones del select */
+select option img {
+    max-width: 20px;
+    max-height: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Estilos para el formulario */
+#formulario-cotizacion {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}

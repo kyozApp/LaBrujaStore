@@ -14,12 +14,12 @@
 
         <!-- Logo o imagen -->
         <div id="header-img-logo">
-            <img id="header-cont-img-logo" src="img/labrujastore.png" alt="Logo de la empresa">
+            <a href="index.php"><img id="header-cont-img-logo" src="img/labrujastore.png" alt="Logo de la empresa"></a>
         </div>
 
         <!-- Botones -->
         <div id="header-botones">
-            <div class="botones-cont btn-acion"><a href="#">Cotización</a></div>
+            <div class="botones-cont btn-acion"><a href="view/cotizacion.php">Cotización</a></div>
             <div class="dropdown botones-cont btn-acion">
                 <a href="#">Categoría</a>
                 <!-- Lista de categorías -->

@@ -1,0 +1,43 @@
+/* Estilos para la confirmación de borrado */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.confirm-delete {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.confirm-delete p {
+    margin: 0 0 20px;
+}
+
+.confirm-delete form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.confirm-delete input,
+.confirm-delete a {
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.confirm-delete input[type="submit"] {
+    background-color: #d9534f;
+    border: none;
+}
+
+.confirm-delete a {
+    background-color: #5bc0de;
+    border: none;
+}

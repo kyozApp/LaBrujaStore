@@ -70,21 +70,60 @@
 
     <main class="body-cont">
 
-        <form id="formulario-cotizacion" action="#" method="post">
+        <form id="formulario-cotizacion" action="procesar_cotizacion.php" method="post">
             <h1>COTIZA TU PC AQUI</h1>
+
+            <!-- Procesador -->
             <label for="procesador">Selecciona tu procesador:</label>
-            <select class="procesador" name="procesador" onchange="cargarPlacasBase()">
-                <option value="Ryzen 5 5500">Ryzen 5 5500 <img class="imagenProcesador" src="" alt="Procesador 5500"></option>
-                <!-- Otros options -->
+            <select id="procesador" name="procesador" onchange="cargarPlacasBase()">
+                <option value="Ryzen 5 5500">Ryzen 5 5500</option>
+                <option value="Ryzen 5 5600G">Ryzen 5 5600G</option>
+                <option value="Intel 12400F">Intel 12400F</option>
             </select>
+            <img id="imagenProcesador" alt="Imagen del procesador">
 
-            <img class="imagenProcesador" alt="Imagen del procesador">
-
-            <select class="placaBase" name="placaBase" disabled>
+            <!-- Placa Base -->
+            <label for="placaBase">Selecciona tu placa base:</label>
+            <select id="placaBase" name="placaBase" disabled>
                 <!-- Opciones serán cargadas dinámicamente con JavaScript -->
             </select>
-            <img class="imagenPlaca" alt="Imagen de la placa">
+            <img id="imagenPlaca" alt="Imagen de la placa">
 
+
+            <!-- Memoria RAM -->
+            <label for="memoriaRam">Selecciona tu memoria RAM:</label>
+            <select id="memoriaRam" name="memoriaRam" disabled>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+            <img id="imagenMemoriaRam" alt="Imagen de la memoria RAM">
+
+            <!-- Almacenamiento -->
+            <label for="almacenamiento">Selecciona tu almacenamiento:</label>
+            <select id="almacenamiento" name="almacenamiento" disabled>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+            <img id="imagenAlmacenamiento" alt="Imagen del almacenamiento">
+
+            <!-- Tarjeta de Video -->
+            <label for="tarjetaVideo">Selecciona tu tarjeta de video:</label>
+            <select id="tarjetaVideo" name="tarjetaVideo" disabled>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+            <img id="imagenTarjetaVideo" alt="Imagen de la tarjeta de video">
+
+            <!-- Fuente de Poder -->
+            <label for="fuentePoder">Selecciona tu fuente de poder:</label>
+            <select id="fuentePoder" name="fuentePoder" disabled>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+            <img id="imagenFuentePoder" alt="Imagen de la fuente de poder">
+
+            <!-- Case -->
+            <label for="case">Selecciona tu case:</label>
+            <select id="case" name="case" disabled>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+            <img id="imagenCase" alt="Imagen del case">
 
             <!-- Otras selecciones ... -->
 
@@ -92,6 +131,8 @@
         </form>
 
         <div id="resultado-cotizacion"></div>
+
+
 
     </main>
 

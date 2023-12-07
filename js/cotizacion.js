@@ -1,49 +1,43 @@
-// ... (otras funciones)
+// Contenido de tu archivo cotizacion.js
 
-// Nueva función para obtener la lista de procesadores desde el servidor
-function obtenerListaProcesadores(callback) {
-    fetch('../view/obtener_procesador.php')
-        .then(response => response.json())
-        .then(data => {
-            // Llamar al callback con la lista de procesadores
-            callback(data.procesadores);
-        })
-        .catch(error => {
-            console.error('Error al obtener la lista de procesadores:', error);
-            // Manejar el error de otra manera si es necesario
-            callback([]);
-        });
-}
+// Definir las relaciones de compatibilidad entre procesadores y placas base
+const compatibilidad = {
+    "Ryzen 5 5500": ["A", "B"],
+    "Ryzen 5 5600G": ["A", "C"],
+    "Intel 12400F": ["A", "B"]
+};
 
-// Modificar la función cargarPlacasBase para obtener y cargar dinámicamente la lista de procesadores
+// Función para cargar las opciones de placas base al seleccionar un procesador
 function cargarPlacasBase() {
-    var procesadorSelect = document.querySelector(".procesador");
-    var placaBaseSelect = document.querySelector(".placaBase");
-    var imagenProcesador = document.querySelector(".imagenProcesador");
-    var imagenPlaca = document.querySelector(".imagenPlaca");
-    var procesadorSeleccionado = procesadorSelect.value;
+    // Obtener el elemento select del procesador y la placa base
+    const procesadorSelect = document.getElementById("procesador");
+    const placaBaseSelect = document.getElementById("placaBase");
 
-    placaBaseSelect.innerHTML = ""; // Limpiar las opciones actuales de placa base
+    // Obtener el valor seleccionado del procesador
+    const procesadorSeleccionado = procesadorSelect.value;
 
-    // Lógica para cargar dinámicamente las opciones de procesador
-    obtenerListaProcesadores(function (listaProcesadores) {
-        // Limpiar las opciones actuales de procesador
-        procesadorSelect.innerHTML = "";
+    // Limpiar las opciones actuales de la placa base
+    placaBaseSelect.innerHTML = "";
 
-        // Agregar las opciones de procesador
-        listaProcesadores.forEach(function (procesador) {
-            var option = document.createElement("option");
-            option.value = procesador.Nombre;
-            option.text = procesador.Nombre;
-            procesadorSelect.add(option);
+    // Verificar si el procesador seleccionado tiene opciones de placa base asociadas
+    if (compatibilidad.hasOwnProperty(procesadorSeleccionado)) {
+        // Obtener las opciones de placa base para el procesador seleccionado
+        const opcionesPlacaBase = compatibilidad[procesadorSeleccionado];
+
+        // Agregar las opciones de placa base al elemento select
+        opcionesPlacaBase.forEach(opcion => {
+            const option = document.createElement("option");
+            option.value = opcion;
+            option.text = opcion;
+            placaBaseSelect.add(option);
         });
 
-        // Obtener la imagen del procesador seleccionado desde el servidor
-        obtenerImagenProcesador(procesadorSeleccionado, function (imagenProcesadorURL) {
-            // Actualizar la imagen del procesador en la interfaz
-            imagenProcesador.src = imagenProcesadorURL;
-        });
-    });
-
-    // ... (resto de la función)
+        // Habilitar el elemento select de la placa base
+        placaBaseSelect.disabled = false;
+    } else {
+        // Si no hay opciones de placa base, deshabilitar el elemento select
+        placaBaseSelect.disabled = true;
+    }
 }
+
+// Fin del contenido de cotizacion.js

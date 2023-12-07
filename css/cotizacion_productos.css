@@ -1,36 +1,55 @@
-/* Estilos para las imágenes junto a las opciones del select */
-select option img {
-    max-width: 20px;
-    max-height: 20px;
-    margin-left: 10px;
-    vertical-align: middle;
+/* Estilos específicos para la sección de cotización */
+
+#formulario-cotizacion {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para el formulario */
-#formulario-cotizacion {
-    max-width: 400px;
-    margin: 20px auto;
+h1 {
+    text-align: center;
+    color: #333;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 select {
     width: 100%;
     padding: 8px;
+    margin-top: 5px;
     margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    display: block;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
     background-color: #45a049;
+}
+
+#resultado-cotizacion {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0;
 }

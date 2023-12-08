@@ -118,7 +118,13 @@
                 while ($producto = $result->fetch_assoc()) {
                     // Ruta relativa a la carpeta img/producto/
                     $imagenRuta = '' . $producto['Imagen'];
-                
+
+                    // Escapar comillas simples en el nombre del producto
+                    $nombreProducto = str_replace("'", "\\'", $producto['Nombre']);
+
+                    // Convertir nuevas líneas en saltos de línea HTML
+                    $descripcionConSaltosDeLinea = nl2br($producto['Descripcion']);
+
                     // Mostrar cada producto en una tarjeta
                     echo '<div class="card">';
                     echo '<div class="card-body">';
@@ -126,11 +132,13 @@
                     // Ajusta la ruta de la imagen
                     echo '<img src="' . $imagenRuta . '" alt="' . $producto['Nombre'] . '" class="card-img-top">';
                     echo '<p class="card-text">' . $producto['Precio'] . '</p>';
-                    echo '<a href="#" onclick="abrirModal(\'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Descripcion'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
+
+                    // Guardar la descripción como un atributo personalizado
+                    echo '<a href="#" data-descripcion="' . htmlspecialchars($producto['Descripcion']) . '" onclick="abrirModal(this, \'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
                     echo '</div>';
                     echo '</div>';
                 }
-                              
+
 
                 // Cerrar la fila para la categoría actual
                 echo '</div>';

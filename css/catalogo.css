@@ -1,0 +1,131 @@
+/* Estilos para la tarjeta */
+.card {
+    width: 18rem;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;  /* Utiliza flexbox para organizar los elementos internos */
+    flex-direction: column;  /* Asegúrate de que los elementos se apilen verticalmente */
+    align-items: center;  /* Centra horizontalmente los elementos dentro de la tarjeta */
+    justify-content: center;  /* Centra verticalmente los elementos dentro de la tarjeta */
+}
+
+/* Estilos para la imagen en la tarjeta */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Añade esta línea para asegurarte de que la imagen se ajuste correctamente */
+    min-height: 200px; /* Añade esta línea para establecer una altura mínima para la imagen */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilos para el cuerpo de la tarjeta */
+.card-body {
+    padding: 10px;
+    text-align: center;  /* Centra el texto horizontalmente */
+}
+
+/* Estilos para el título de la tarjeta */
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+/* Estilos para el precio en la tarjeta */
+.card-text {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Estilo para el enlace en la tarjeta */
+.card-body a {
+    display: block;  /* Convierte el enlace en un bloque para centrar fácilmente */
+    margin-top: 10px;  /* Añade un espacio superior para separar del texto anterior */
+}
+
+/* Estilo del Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+    padding-top: 60px;
+}
+
+/* Estilo del Modal */
+.modal-content {
+    position: relative;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Estilo del botón para cerrar el modal */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Añade este estilo para hacer el botón de cerrar más grande */
+.close {
+    font-size: 32px;
+}
+
+/* Resto del estilo del botón para cerrar el modal */
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
+/* Primera Columna */
+.columna {
+    flex: 1;
+    padding: 10px;
+    text-align: center;  /* Centra horizontalmente el contenido */
+}
+
+/* Segunda Columna */
+.columna {
+    flex: 1;
+    padding: 10px;
+    text-align: center;  /* Centra horizontalmente el contenido */
+}
+
+/* Estilo para el contenido en las columnas */
+.columna h2,
+.columna img,
+.columna p,
+.columna a {
+    margin: 10px 0;
+}
+
+/* Estilo específico para la imagen en la segunda columna */
+.columna img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px;
+}
+

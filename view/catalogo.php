@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizaciones</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/index_producto.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/catalogo.css">
 </head>
 
 <body>
@@ -15,14 +15,14 @@
 
         <!-- Logo o imagen -->
         <div id="header-img-logo">
-            <a href="index.php"><img id="header-cont-img-logo" src="img/labrujastore.png" alt="Logo de la empresa"></a>
+            <a href="index.php"><img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa"></a>
         </div>
 
         <!-- Botones -->
         <div id="header-botones">
-            <div class="botones-cont btn-acion"><a href="view/cotizacion.php">Cotización</a></div>
+            <div class="botones-cont btn-acion"><a href="cotizacion.php">Cotización</a></div>
             <div class="dropdown botones-cont btn-acion">
-                <a href="view/catalogo.php">Catalogo</a>
+                <a href="#">Catalogo</a>
                 <!-- Lista de categorías -->
                 <div class="categorias-lista">
                     <!-- Aquí se cargarían dinámicamente las categorías desde la base de datos -->
@@ -43,7 +43,7 @@
                     <a class="cont-lista" href="#">Combos</a>
                 </div>
             </div>
-            <div class="botones-cont btn-acion"><a href="view/login.php">Iniciar Sesion</a></div>
+            <div class="botones-cont btn-acion"><a href="login.php">Iniciar Sesion</a></div>
 
             <!-- Barra de 3 lineas -->
             <div class="bloque-icon-tres-lineas">
@@ -96,7 +96,7 @@
 
         <?php
         // Incluir el archivo de conexión
-        include('conexiondb/conexion.php');
+        include('../conexiondb/conexion.php');
 
         // Ordenar las categorías según tu preferencia
         $categoriasOrdenadas = array("Procesador", "Placa", "Memoria ram", "Almacenamiento", "Tarjeta de video", "Fuente de poder", "Case", "Torre de refrigeracion", "Torre liquida", "Monitor", "Teclado", "Mouse", "Audifonos", "Laptop", "Combos");
@@ -117,15 +117,13 @@
 
                 while ($producto = $result->fetch_assoc()) {
                     // Ruta relativa a la carpeta img/producto/
-                    echo 'Ruta de la imagen en la base de datos: ' . $producto['Imagen'];
-                    $imagenRuta = 'img/producto/' . $producto['Imagen'];
+                    $imagenRuta = '' . $producto['Imagen'];
                 
                     // Mostrar cada producto en una tarjeta
                     echo '<div class="card">';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $producto['Nombre'] . '</h5>';
                     // Ajusta la ruta de la imagen
-                    echo 'Ruta de la imagen: ' . $imagenRuta;
                     echo '<img src="' . $imagenRuta . '" alt="' . $producto['Nombre'] . '" class="card-img-top">';
                     echo '<p class="card-text">' . $producto['Precio'] . '</p>';
                     echo '<a href="#" onclick="abrirModal(\'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Descripcion'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
@@ -171,7 +169,7 @@
         <p>&copy; 2023 La Bruja Store. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/index_producto.js"></script>
+    <script src="../js/catalogo.js"></script>
 
 </body>
 

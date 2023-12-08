@@ -21,7 +21,7 @@
         <div id="header-botones">
             <div class="botones-cont btn-acion"><a href="view/cotizacion.php">Cotización</a></div>
             <div class="dropdown botones-cont btn-acion">
-                <a href="#">Categoría</a>
+                <a href="#">Catalogo</a>
                 <!-- Lista de categorías -->
                 <div class="categorias-lista">
                     <!-- Aquí se cargarían dinámicamente las categorías desde la base de datos -->

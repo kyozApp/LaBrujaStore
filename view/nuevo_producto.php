@@ -12,7 +12,7 @@ if (!isset($_SESSION['id_usuario'])) {
 include('../conexiondb/conexion.php');
 
 // Definir las opciones de categoría
-$categorias = array("Placa", "Procesador", "Case");
+$categorias = array("Procesador", "Placa", "Memoria ram", "Almacenamiento", "Tarjeta de video", "Fuente de poder", "Case", "Torre de refrigeracion", "Torre liquida", "Monitor", "Teclado", "Mouse", "Audifonos", "Laptop", "Combos");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
@@ -59,11 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Crear - CRUD PHP</title>
     <link rel="stylesheet" href="../css/nuevo_producto.css">
 </head>
+
 <body>
     <div class="container">
         <form action="nuevo_producto.php" method="post" enctype="multipart/form-data">
@@ -102,4 +104,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="../js/nuevo_producto.js"></script>
 </body>
+
 </html>

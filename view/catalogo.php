@@ -112,6 +112,9 @@
                 // Mostrar el título de la categoría
                 echo '<h1>' . $categoria . '</h1>';
 
+                // Contador para seguir la pista de productos por fila
+                $productosEnFila = 0;
+
                 // Abrir una fila para la categoría actual
                 echo '<div class="product-row">';
 
@@ -132,15 +135,22 @@
                     // Ajusta la ruta de la imagen
                     echo '<img src="' . $imagenRuta . '" alt="' . $producto['Nombre'] . '" class="card-img-top">';
                     echo '<p class="card-text">' . $producto['Precio'] . '</p>';
-
-                    // Guardar la descripción como un atributo personalizado
                     echo '<a href="#" data-descripcion="' . htmlspecialchars($producto['Descripcion']) . '" onclick="abrirModal(this, \'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
                     echo '</div>';
                     echo '</div>';
+
+                    // Incrementar el contador de productos en la fila
+                    $productosEnFila++;
+
+                    // Cerrar la fila y abrir una nueva si se alcanza el límite de productos por fila
+                    if ($productosEnFila == 4) {
+                        echo '</div>'; // Cerrar la fila actual
+                        echo '<div class="product-row">'; // Abrir una nueva fila
+                        $productosEnFila = 0; // Reiniciar el contador
+                    }
                 }
 
-
-                // Cerrar la fila para la categoría actual
+                // Cerrar la fila para la categoría actual (puede haber menos de 4 productos en la última fila)
                 echo '</div>';
             }
         }

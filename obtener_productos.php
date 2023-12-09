@@ -49,11 +49,28 @@ while ($row = $resultTarjetasVideo->fetch_assoc()) {
     $tarjetasVideo[] = $tarjetaVideo;
 }
 
-// Combinar datos de procesadores, almacenamientos y tarjetas de video
+// Consulta para obtener las fuentes de poder
+$queryFuentesPoder = "SELECT * FROM fuente_de_poder";
+$resultFuentesPoder = $conexion->query($queryFuentesPoder);
+
+$fuentesPoder = array();
+
+while ($row = $resultFuentesPoder->fetch_assoc()) {
+    $fuentePoder = array(
+        'Id' => $row['Id_Fuente_De_Poder'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $fuentesPoder[] = $fuentePoder;
+}
+
+// Combinar datos de procesadores, almacenamientos, tarjetas de video y fuentes de poder
 $datosCombinados = array(
     'procesadores' => $procesadores,
     'almacenamientos' => $almacenamientos,
-    'tarjetasVideo' => $tarjetasVideo
+    'tarjetasVideo' => $tarjetasVideo,
+    'fuentesPoder' => $fuentesPoder
 );
 
 echo json_encode($datosCombinados);

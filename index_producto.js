@@ -1,15 +1,17 @@
 // Cuando el documento esté listo
-$(document).ready(function() {
-    // Obtener los selectores y spans de procesadores, almacenamientos y tarjetas de video
+$(document).ready(function () {
+    // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video y fuentes de poder
     var procesadorSelect = $('#procesadorSelect');
     var almacenamiento1Select = $('#almacenamiento1');
     var almacenamiento2Select = $('#almacenamiento2');
     var tarjetaVideoSelect = $('#tarjetaVideo');
+    var fuentePoderSelect = $('#fuentePoder');
 
     var precioProcesadorSpan = $('#precioProcesador');
     var precioAlmacenamiento1Span = $('#precioAlmacenamiento1');
     var precioAlmacenamiento2Span = $('#precioAlmacenamiento2');
     var precioTarjetaVideoSpan = $('#precioTarjetaVideo');
+    var precioFuentePoderSpan = $('#precioFuentePoder');
 
     var data; // Variable para almacenar los datos de procesadores, almacenamientos y tarjetas de video
 
@@ -18,7 +20,7 @@ $(document).ready(function() {
         url: 'obtener_productos.php',
         type: 'GET',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
             // Almacenar los datos de procesadores, almacenamientos y tarjetas de video en la variable data
             data = response;
 
@@ -31,7 +33,7 @@ $(document).ready(function() {
                 select.append('<option value="" disabled selected>Selecciona...</option>');
 
                 // Agregar cada opción al select
-                $.each(opciones, function(index, opcion) {
+                $.each(opciones, function (index, opcion) {
                     select.append('<option value="' + opcion.Id + '">' + opcion.Nombre + '</option>');
                 });
             }
@@ -41,19 +43,21 @@ $(document).ready(function() {
             llenarSelect(almacenamiento1Select, data.almacenamientos);
             llenarSelect(almacenamiento2Select, data.almacenamientos);
             llenarSelect(tarjetaVideoSelect, data.tarjetasVideo);
+            llenarSelect(fuentePoderSelect, data.fuentesPoder);
 
             // Habilitar los selectores
             procesadorSelect.prop('disabled', false);
             almacenamiento1Select.prop('disabled', false);
             almacenamiento2Select.prop('disabled', false);
             tarjetaVideoSelect.prop('disabled', false);
+            fuentePoderSelect.prop('disabled', false);
         },
-        error: function(error) {
+        error: function (error) {
             console.log('Error al obtener datos:', error);
         }
     });
 
-    // Agregar eventos change a los selectores de procesadores, almacenamientos y tarjetas de video
+    // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video y fuentes de poder
     procesadorSelect.change(function() {
         mostrarPrecioSeleccionado(procesadorSelect, precioProcesadorSpan);
     });
@@ -70,6 +74,10 @@ $(document).ready(function() {
         mostrarPrecioSeleccionado(tarjetaVideoSelect, precioTarjetaVideoSpan);
     });
 
+    fuentePoderSelect.change(function() {
+        mostrarPrecioSeleccionado(fuentePoderSelect, precioFuentePoderSpan);
+    });
+
     // Función para mostrar el precio del elemento seleccionado en el span correspondiente
     function mostrarPrecioSeleccionado(selector, span) {
         // Obtener el valor seleccionado
@@ -79,6 +87,7 @@ $(document).ready(function() {
         var elementoSeleccionado = data.procesadores
             .concat(data.almacenamientos)
             .concat(data.tarjetasVideo)
+            .concat(data.fuentesPoder)
             .find(function(elemento) {
                 return elemento.Id == elementoId;
             });
@@ -103,12 +112,12 @@ function actualizarPrecioTotal() {
 }
 
 // Agregar un evento change al selector de procesadores
-procesadorSelect.change(function() {
+procesadorSelect.change(function () {
     // Obtener el valor seleccionado del procesador
     var procesadorId = $(this).val();
 
     // Buscar el procesador seleccionado en el array de datos
-    var procesadorSeleccionado = data.procesadores.find(function(procesador) {
+    var procesadorSeleccionado = data.procesadores.find(function (procesador) {
         return procesador.Id == procesadorId;
     });
 
@@ -123,12 +132,12 @@ procesadorSelect.change(function() {
 });
 
 // Agregar eventos change a los selectores de almacenamientos
-almacenamiento1Select.change(function() {
+almacenamiento1Select.change(function () {
     // Obtener el valor seleccionado del almacenamiento1
     var almacenamiento1Id = $(this).val();
 
     // Buscar el almacenamiento1 seleccionado en el array de datos
-    var almacenamiento1Seleccionado = data.almacenamientos.find(function(almacenamiento) {
+    var almacenamiento1Seleccionado = data.almacenamientos.find(function (almacenamiento) {
         return almacenamiento.Id == almacenamiento1Id;
     });
 
@@ -142,12 +151,12 @@ almacenamiento1Select.change(function() {
     actualizarPrecioTotal();
 });
 
-almacenamiento2Select.change(function() {
+almacenamiento2Select.change(function () {
     // Obtener el valor seleccionado del almacenamiento2
     var almacenamiento2Id = $(this).val();
 
     // Buscar el almacenamiento2 seleccionado en el array de datos
-    var almacenamiento2Seleccionado = data.almacenamientos.find(function(almacenamiento) {
+    var almacenamiento2Seleccionado = data.almacenamientos.find(function (almacenamiento) {
         return almacenamiento.Id == almacenamiento2Id;
     });
 
@@ -168,10 +177,10 @@ function mostrarPrecioSeleccionado(selector, span, tipoPrecio) {
 
     // Buscar el elemento seleccionado en el array de datos
     var elementoSeleccionado = tipoPrecio == 'procesador' ?
-        data.procesadores.find(function(elemento) {
+        data.procesadores.find(function (elemento) {
             return elemento.Id == elementoId;
         }) :
-        data.almacenamientos.find(function(elemento) {
+        data.almacenamientos.find(function (elemento) {
             return elemento.Id == elementoId;
         });
 

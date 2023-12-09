@@ -65,12 +65,29 @@ while ($row = $resultFuentesPoder->fetch_assoc()) {
     $fuentesPoder[] = $fuentePoder;
 }
 
-// Combinar datos de procesadores, almacenamientos, tarjetas de video y fuentes de poder
+// Consulta para obtener los cases
+$queryCases = "SELECT * FROM cases";
+$resultCases = $conexion->query($queryCases);
+
+$cases = array();
+
+while ($row = $resultCases->fetch_assoc()) {
+    $case = array(
+        'Id' => $row['Id_Cases'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $cases[] = $case;
+}
+
+// Combinar datos de procesadores, almacenamientos, tarjetas de video, fuentes de poder y cases
 $datosCombinados = array(
     'procesadores' => $procesadores,
     'almacenamientos' => $almacenamientos,
     'tarjetasVideo' => $tarjetasVideo,
-    'fuentesPoder' => $fuentesPoder
+    'fuentesPoder' => $fuentesPoder,
+    'cases' => $cases
 );
 
 echo json_encode($datosCombinados);

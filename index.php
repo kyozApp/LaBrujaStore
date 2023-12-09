@@ -142,9 +142,9 @@ include('conexiondb/conexion.php');
 
             <!-- Case -->
             <div class="cotizacion-item">
-                <label for="case">CASE:</label>
-                <select id="case" name="case"></select>
-                <span id="precioCase" class="precioSpan"></span>
+                <label for="cases">CASE:</label>
+                <select id="cases" name="cases"></select>
+                <span id="precioCases" class="precioSpan"></span>
             </div>
 
             <!-- Monitor -->

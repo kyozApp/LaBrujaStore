@@ -1,17 +1,20 @@
 // Cuando el documento esté listo
 $(document).ready(function () {
     // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video y fuentes de poder
+    // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video, fuentes de poder y cases
     var procesadorSelect = $('#procesadorSelect');
     var almacenamiento1Select = $('#almacenamiento1');
     var almacenamiento2Select = $('#almacenamiento2');
     var tarjetaVideoSelect = $('#tarjetaVideo');
     var fuentePoderSelect = $('#fuentePoder');
+    var casesSelect = $('#cases');
 
     var precioProcesadorSpan = $('#precioProcesador');
     var precioAlmacenamiento1Span = $('#precioAlmacenamiento1');
     var precioAlmacenamiento2Span = $('#precioAlmacenamiento2');
     var precioTarjetaVideoSpan = $('#precioTarjetaVideo');
     var precioFuentePoderSpan = $('#precioFuentePoder');
+    var precioCasesSpan = $('#precioCases');
 
     var data; // Variable para almacenar los datos de procesadores, almacenamientos y tarjetas de video
 
@@ -44,6 +47,7 @@ $(document).ready(function () {
             llenarSelect(almacenamiento2Select, data.almacenamientos);
             llenarSelect(tarjetaVideoSelect, data.tarjetasVideo);
             llenarSelect(fuentePoderSelect, data.fuentesPoder);
+            llenarSelect(casesSelect, data.cases);
 
             // Habilitar los selectores
             procesadorSelect.prop('disabled', false);
@@ -51,13 +55,14 @@ $(document).ready(function () {
             almacenamiento2Select.prop('disabled', false);
             tarjetaVideoSelect.prop('disabled', false);
             fuentePoderSelect.prop('disabled', false);
+            casesSelect.prop('disabled', false);
         },
         error: function (error) {
             console.log('Error al obtener datos:', error);
         }
     });
 
-    // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video y fuentes de poder
+    // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video, fuentes de poder y cases
     procesadorSelect.change(function() {
         mostrarPrecioSeleccionado(procesadorSelect, precioProcesadorSpan);
     });
@@ -78,6 +83,10 @@ $(document).ready(function () {
         mostrarPrecioSeleccionado(fuentePoderSelect, precioFuentePoderSpan);
     });
 
+    casesSelect.change(function() {
+        mostrarPrecioSeleccionado(casesSelect, precioCasesSpan);
+    });
+
     // Función para mostrar el precio del elemento seleccionado en el span correspondiente
     function mostrarPrecioSeleccionado(selector, span) {
         // Obtener el valor seleccionado
@@ -88,6 +97,7 @@ $(document).ready(function () {
             .concat(data.almacenamientos)
             .concat(data.tarjetasVideo)
             .concat(data.fuentesPoder)
+            .concat(data.cases)
             .find(function(elemento) {
                 return elemento.Id == elementoId;
             });

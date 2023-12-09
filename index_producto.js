@@ -1,13 +1,17 @@
 // Cuando el documento esté listo
 $(document).ready(function () {
-    // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video y fuentes de poder
-    // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video, fuentes de poder y cases
+    // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video, fuentes de poder, cases, monitores, teclados, mouses, audífonos y refrigeraciones
     var procesadorSelect = $('#procesadorSelect');
     var almacenamiento1Select = $('#almacenamiento1');
     var almacenamiento2Select = $('#almacenamiento2');
     var tarjetaVideoSelect = $('#tarjetaVideo');
     var fuentePoderSelect = $('#fuentePoder');
     var casesSelect = $('#cases');
+    var monitorSelect = $('#monitor');
+    var tecladoSelect = $('#teclado');
+    var mouseSelect = $('#mouse');
+    var audifonoSelect = $('#audifono');
+    var refrigeracionSelect = $('#refrigeracion');
 
     var precioProcesadorSpan = $('#precioProcesador');
     var precioAlmacenamiento1Span = $('#precioAlmacenamiento1');
@@ -15,6 +19,11 @@ $(document).ready(function () {
     var precioTarjetaVideoSpan = $('#precioTarjetaVideo');
     var precioFuentePoderSpan = $('#precioFuentePoder');
     var precioCasesSpan = $('#precioCases');
+    var precioMonitorSpan = $('#precioMonitor');
+    var precioTecladoSpan = $('#precioTeclado');
+    var precioMouseSpan = $('#precioMouse');
+    var precioAudifonoSpan = $('#precioAudifono');
+    var precioRefrigeracionSpan = $('#precioRefrigeracion');
 
     var data; // Variable para almacenar los datos de procesadores, almacenamientos y tarjetas de video
 
@@ -48,6 +57,11 @@ $(document).ready(function () {
             llenarSelect(tarjetaVideoSelect, data.tarjetasVideo);
             llenarSelect(fuentePoderSelect, data.fuentesPoder);
             llenarSelect(casesSelect, data.cases);
+            llenarSelect(monitorSelect, data.monitores);
+            llenarSelect(tecladoSelect, data.teclados);
+            llenarSelect(mouseSelect, data.mouses);
+            llenarSelect(audifonoSelect, data.audifonos);
+            llenarSelect(refrigeracionSelect, data.refrigeraciones);
 
             // Habilitar los selectores
             procesadorSelect.prop('disabled', false);
@@ -56,13 +70,18 @@ $(document).ready(function () {
             tarjetaVideoSelect.prop('disabled', false);
             fuentePoderSelect.prop('disabled', false);
             casesSelect.prop('disabled', false);
+            monitorSelect.prop('disabled', false);
+            tecladoSelect.prop('disabled', false);
+            mouseSelect.prop('disabled', false);
+            audifonoSelect.prop('disabled', false);
+            refrigeracionSelect.prop('disabled', false);
         },
         error: function (error) {
             console.log('Error al obtener datos:', error);
         }
     });
 
-    // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video, fuentes de poder y cases
+    // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video, fuentes de poder, cases, monitores, teclados, mouses, audífonos y refrigeraciones
     procesadorSelect.change(function() {
         mostrarPrecioSeleccionado(procesadorSelect, precioProcesadorSpan);
     });
@@ -87,6 +106,26 @@ $(document).ready(function () {
         mostrarPrecioSeleccionado(casesSelect, precioCasesSpan);
     });
 
+    monitorSelect.change(function() {
+        mostrarPrecioSeleccionado(monitorSelect, precioMonitorSpan);
+    });
+
+    tecladoSelect.change(function() {
+        mostrarPrecioSeleccionado(tecladoSelect, precioTecladoSpan);
+    });
+
+    mouseSelect.change(function() {
+        mostrarPrecioSeleccionado(mouseSelect, precioMouseSpan);
+    });
+
+    audifonoSelect.change(function() {
+        mostrarPrecioSeleccionado(audifonoSelect, precioAudifonoSpan);
+    });
+
+    refrigeracionSelect.change(function() {
+        mostrarPrecioSeleccionado(refrigeracionSelect, precioRefrigeracionSpan);
+    });
+
     // Función para mostrar el precio del elemento seleccionado en el span correspondiente
     function mostrarPrecioSeleccionado(selector, span) {
         // Obtener el valor seleccionado
@@ -98,6 +137,11 @@ $(document).ready(function () {
             .concat(data.tarjetasVideo)
             .concat(data.fuentesPoder)
             .concat(data.cases)
+            .concat(data.monitores)
+            .concat(data.teclados)
+            .concat(data.mouses)
+            .concat(data.audifonos)
+            .concat(data.refrigeraciones)
             .find(function(elemento) {
                 return elemento.Id == elementoId;
             });

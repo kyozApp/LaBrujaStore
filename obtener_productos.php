@@ -81,13 +81,94 @@ while ($row = $resultCases->fetch_assoc()) {
     $cases[] = $case;
 }
 
-// Combinar datos de procesadores, almacenamientos, tarjetas de video, fuentes de poder y cases
+// Consultas para obtener los datos de las nuevas secciones
+$queryMonitores = "SELECT * FROM monitor";
+$resultMonitores = $conexion->query($queryMonitores);
+
+$monitores = array();
+
+while ($row = $resultMonitores->fetch_assoc()) {
+    $monitor = array(
+        'Id' => $row['Id_Monitor'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $monitores[] = $monitor;
+}
+
+$queryTeclados = "SELECT * FROM teclado";
+$resultTeclados = $conexion->query($queryTeclados);
+
+$teclados = array();
+
+while ($row = $resultTeclados->fetch_assoc()) {
+    $teclado = array(
+        'Id' => $row['Id_Teclado'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $teclados[] = $teclado;
+}
+
+$queryMouses = "SELECT * FROM mouse";
+$resultMouses = $conexion->query($queryMouses);
+
+$mouses = array();
+
+while ($row = $resultMouses->fetch_assoc()) {
+    $mouse = array(
+        'Id' => $row['Id_Mouse'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $mouses[] = $mouse;
+}
+
+$queryAudifonos = "SELECT * FROM audifono";
+$resultAudifonos = $conexion->query($queryAudifonos);
+
+$audifonos = array();
+
+while ($row = $resultAudifonos->fetch_assoc()) {
+    $audifono = array(
+        'Id' => $row['Id_Audifono'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $audifonos[] = $audifono;
+}
+
+$queryRefrigeraciones = "SELECT * FROM refrigeracion";
+$resultRefrigeraciones = $conexion->query($queryRefrigeraciones);
+
+$refrigeraciones = array();
+
+while ($row = $resultRefrigeraciones->fetch_assoc()) {
+    $refrigeracion = array(
+        'Id' => $row['Id_Refrigeracion'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $refrigeraciones[] = $refrigeracion;
+}
+
+// Combinar datos de procesadores, almacenamientos, tarjetas de video, fuentes de poder, cases, monitores, teclados, mouses, audífonos y refrigeraciones
 $datosCombinados = array(
     'procesadores' => $procesadores,
     'almacenamientos' => $almacenamientos,
     'tarjetasVideo' => $tarjetasVideo,
     'fuentesPoder' => $fuentesPoder,
-    'cases' => $cases
+    'cases' => $cases,
+    'monitores' => $monitores,
+    'teclados' => $teclados,
+    'mouses' => $mouses,
+    'audifonos' => $audifonos,
+    'refrigeraciones' => $refrigeraciones
 );
 
 echo json_encode($datosCombinados);

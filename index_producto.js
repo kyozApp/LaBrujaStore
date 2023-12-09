@@ -1,23 +1,25 @@
 // Cuando el documento esté listo
 $(document).ready(function() {
-    // Obtener los selectores y spans de procesadores y almacenamientos
+    // Obtener los selectores y spans de procesadores, almacenamientos y tarjetas de video
     var procesadorSelect = $('#procesadorSelect');
     var almacenamiento1Select = $('#almacenamiento1');
     var almacenamiento2Select = $('#almacenamiento2');
-    
+    var tarjetaVideoSelect = $('#tarjetaVideo');
+
     var precioProcesadorSpan = $('#precioProcesador');
     var precioAlmacenamiento1Span = $('#precioAlmacenamiento1');
     var precioAlmacenamiento2Span = $('#precioAlmacenamiento2');
+    var precioTarjetaVideoSpan = $('#precioTarjetaVideo');
 
-    var data; // Variable para almacenar los datos de procesadores y almacenamientos
+    var data; // Variable para almacenar los datos de procesadores, almacenamientos y tarjetas de video
 
-    // Realizar una solicitud AJAX para obtener los nombres y precios de procesadores y almacenamientos desde la base de datos
+    // Realizar una solicitud AJAX para obtener los nombres y precios de procesadores, almacenamientos y tarjetas de video desde la base de datos
     $.ajax({
         url: 'obtener_productos.php',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            // Almacenar los datos de procesadores y almacenamientos en la variable data
+            // Almacenar los datos de procesadores, almacenamientos y tarjetas de video en la variable data
             data = response;
 
             // Función para llenar un select con opciones
@@ -38,23 +40,24 @@ $(document).ready(function() {
             llenarSelect(procesadorSelect, data.procesadores);
             llenarSelect(almacenamiento1Select, data.almacenamientos);
             llenarSelect(almacenamiento2Select, data.almacenamientos);
+            llenarSelect(tarjetaVideoSelect, data.tarjetasVideo);
 
             // Habilitar los selectores
             procesadorSelect.prop('disabled', false);
             almacenamiento1Select.prop('disabled', false);
             almacenamiento2Select.prop('disabled', false);
+            tarjetaVideoSelect.prop('disabled', false);
         },
         error: function(error) {
             console.log('Error al obtener datos:', error);
         }
     });
 
-    // Agregar un evento change al selector de procesadores
+    // Agregar eventos change a los selectores de procesadores, almacenamientos y tarjetas de video
     procesadorSelect.change(function() {
         mostrarPrecioSeleccionado(procesadorSelect, precioProcesadorSpan);
     });
 
-    // Agregar eventos change a los selectores de almacenamientos
     almacenamiento1Select.change(function() {
         mostrarPrecioSeleccionado(almacenamiento1Select, precioAlmacenamiento1Span);
     });
@@ -63,20 +66,28 @@ $(document).ready(function() {
         mostrarPrecioSeleccionado(almacenamiento2Select, precioAlmacenamiento2Span);
     });
 
+    tarjetaVideoSelect.change(function() {
+        mostrarPrecioSeleccionado(tarjetaVideoSelect, precioTarjetaVideoSpan);
+    });
+
     // Función para mostrar el precio del elemento seleccionado en el span correspondiente
     function mostrarPrecioSeleccionado(selector, span) {
         // Obtener el valor seleccionado
         var elementoId = selector.val();
 
         // Buscar el elemento seleccionado en el array de datos
-        var elementoSeleccionado = data.procesadores.concat(data.almacenamientos).find(function(elemento) {
-            return elemento.Id == elementoId;
-        });
+        var elementoSeleccionado = data.procesadores
+            .concat(data.almacenamientos)
+            .concat(data.tarjetasVideo)
+            .find(function(elemento) {
+                return elemento.Id == elementoId;
+            });
 
         // Mostrar el precio del elemento dentro del span
         span.text('Precio: ' + elementoSeleccionado.Precio);
     }
 });
+
 
 // ... (código anterior)
 

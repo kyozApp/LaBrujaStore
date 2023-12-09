@@ -33,10 +33,27 @@ while ($row = $resultAlmacenamientos->fetch_assoc()) {
     $almacenamientos[] = $almacenamiento;
 }
 
-// Combinar datos de procesadores y almacenamientos
+// Consulta para obtener las tarjetas de video
+$queryTarjetasVideo = "SELECT * FROM tarjeta_de_video";
+$resultTarjetasVideo = $conexion->query($queryTarjetasVideo);
+
+$tarjetasVideo = array();
+
+while ($row = $resultTarjetasVideo->fetch_assoc()) {
+    $tarjetaVideo = array(
+        'Id' => $row['Id_Tarjeta_De_Video'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $tarjetasVideo[] = $tarjetaVideo;
+}
+
+// Combinar datos de procesadores, almacenamientos y tarjetas de video
 $datosCombinados = array(
     'procesadores' => $procesadores,
-    'almacenamientos' => $almacenamientos
+    'almacenamientos' => $almacenamientos,
+    'tarjetasVideo' => $tarjetasVideo
 );
 
 echo json_encode($datosCombinados);

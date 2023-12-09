@@ -5,32 +5,15 @@ body {
     min-height: 100vh;
 }
 
-
-/*HEADER*/
 #header {
     background-color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-}
-
-.conte-header {
-    display: flex;
-}
-
-.div-busqueda {
-    display: none;
-    padding: 0;
-}
-
-header a {
-    text-decoration: none;
-    color: white;
 }
 
 #header-img-logo {
@@ -62,10 +45,6 @@ header a {
     padding: 0;
 }
 
-.bloque-icon-tres-lineas:hover .opciones-lista {
-    display: block;
-}
-
 .opciones-lista {
     display: none;
     position: absolute;
@@ -77,11 +56,6 @@ header a {
 
 #icon-tres-lineas {
     width: 30px;
-}
-
-.bloque-icon-lupa {
-    display: none;
-    padding: 0;
 }
 
 .botones-cont a {
@@ -168,17 +142,11 @@ header a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1;
     left: 100%;
-    /* Alinear a la derecha del elemento padre */
     top: 0;
 }
 
-.bottom-busqueda {
-    display: none;
-    padding: 0;
-}
-
 .body-cont {
-    flex: 1; /* Hace que el contenido ocupe el espacio restante */
+    flex: 1;
     margin-top: 100px;
 }
 
@@ -193,7 +161,6 @@ footer p {
     margin: 0;
 }
 
-/*RESPONSIVE*/
 @media (max-width: 970px) {
     .btn-acion {
         display: none;
@@ -259,4 +226,3 @@ footer p {
         padding: 0px;
     }
 }
-

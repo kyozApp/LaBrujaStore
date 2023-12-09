@@ -15,7 +15,7 @@
 
         <!-- Logo o imagen -->
         <div id="header-img-logo">
-            <a href="index.php"><img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa"></a>
+            <a href="../index.php"><img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa"></a>
         </div>
 
         <!-- Botones -->

@@ -1,31 +1,34 @@
+<?php
+include('conexiondb/conexion.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizaciones</title>
+    <title>Tienda La Bruja Store</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/index_producto.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 </head>
 
 <body>
 
     <header id="header">
-
-        <!-- Logo o imagen -->
         <div id="header-img-logo">
             <a href="index.php"><img id="header-cont-img-logo" src="img/labrujastore.png" alt="Logo de la empresa"></a>
         </div>
-
-        <!-- Botones -->
         <div id="header-botones">
             <div class="botones-cont btn-acion"><a href="view/cotizacion.php">Cotización</a></div>
             <div class="dropdown botones-cont btn-acion">
                 <a href="view/catalogo.php">Catalogo</a>
-                <!-- Lista de categorías -->
                 <div class="categorias-lista">
-                    <!-- Aquí se cargarían dinámicamente las categorías desde la base de datos -->
                     <a class="cont-lista" href="#">Procesador</a>
                     <a class="cont-lista" href="#">Placa</a>
                     <a class="cont-lista" href="#">Memoria ram</a>
@@ -44,14 +47,10 @@
                 </div>
             </div>
             <div class="botones-cont btn-acion"><a href="view/login.php">Iniciar Sesion</a></div>
-
-            <!-- Barra de 3 lineas -->
             <div class="bloque-icon-tres-lineas">
                 <img id="icon-tres-lineas" src="img/icon/tres-lineas.png" alt="Icono de menu 3 lineas">
-
                 <div class="opciones-lista">
                     <a class="cont-lista" href="#">Cotización</a>
-
                     <div class="cont-sub-categorias">
                         <a class="cont-lista" href="#">Categorías</a>
                         <div class="opciones-sub-categoria">
@@ -75,95 +74,155 @@
                     <a class="cont-lista" href="view/login.php">Iniciar Sesion</a>
                 </div>
             </div>
-
             <div class="botones-cont div-formulario">
-                <!-- Barra de búsqueda -->
                 <form class="-segundo" action="/ruta_de_busqueda" method="GET">
                     <input class="buscar-text" type="text" name="busqueda" placeholder="Buscar...">
                     <button class="buscar-boton" type="submit">Buscar</button>
                 </form>
             </div>
         </div>
-
-        <!-- Logo la derecha -->
         <div id="header-img-logo-right">
             <img id="header-cont-img-logo" src="img/labrujastore.png" alt="Logo de la empresa">
         </div>
-        <!-- TIENES QUE AL DAR CLICK EN LA LUPA QUE SE ABRA EL BUSCADOR -->
     </header>
 
     <main class="body-cont">
 
-        <?php
-        // Incluir el archivo de conexión
-        include('conexiondb/conexion.php');
+        <form id="formulario-cotizacion" action="procesar_cotizacion.php" method="post">
+            <h1>COTIZA TU PC AQUI</h1>
 
-        // Ordenar las categorías según tu preferencia
-        $categoriasOrdenadas = array("Procesador", "Placa", "Memoria ram", "Almacenamiento", "Tarjeta de video", "Fuente de poder", "Case", "Torre de refrigeracion", "Torre liquida", "Monitor", "Teclado", "Mouse", "Audifonos", "Laptop", "Combos");
+            <!-- Procesador -->
+            <label for="procesador">PROCESADOR:</label>
+            <select id="procesadorSelect" name="procesador"></select>
+            <span id="precioProcesador"></span>
 
-        // Iterar sobre las categorías ordenadas
-        foreach ($categoriasOrdenadas as $categoria) {
-            // Realizar una consulta para obtener la información de productos de la categoría actual
-            $query = "SELECT Nombre, Imagen, Precio, Stock, Descripcion, Enlace FROM Producto WHERE Categoria = '$categoria' ORDER BY Nombre";
-            $result = $conexion->query($query);
 
-            // Verificar si la consulta fue exitosa
-            if ($result->num_rows > 0) {
-                // Mostrar el título de la categoría
-                echo '<h1>' . $categoria . '</h1>';
 
-                // Abrir una fila para la categoría actual
-                echo '<div class="product-row">';
+            <!-- Placa Base -->
+            <label for="placaBase">PLACA:</label>
+            <select id="placaBase" name="placaBase" disabled>
+                <option value="" disabled selected>Selecciona tu placa</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
 
-                while ($producto = $result->fetch_assoc()) {
-                    // Ruta relativa a la carpeta img/producto/
-                    echo 'Ruta de la imagen en la base de datos: ' . $producto['Imagen'];
-                    $imagenRuta = 'img/producto/' . $producto['Imagen'];
-                
-                    // Mostrar cada producto en una tarjeta
-                    echo '<div class="card">';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . $producto['Nombre'] . '</h5>';
-                    // Ajusta la ruta de la imagen
-                    echo 'Ruta de la imagen: ' . $imagenRuta;
-                    echo '<img src="' . $imagenRuta . '" alt="' . $producto['Nombre'] . '" class="card-img-top">';
-                    echo '<p class="card-text">' . $producto['Precio'] . '</p>';
-                    echo '<a href="#" onclick="abrirModal(\'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Descripcion'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-                              
 
-                // Cerrar la fila para la categoría actual
-                echo '</div>';
-            }
-        }
+            <!-- Memoria RAM -->
+            <label for="memoriaRam">MEMORIA RAM:</label>
+            <select id="memoriaRam" name="memoriaRam" disabled>
+                <option value="" disabled selected>Selecciona tu memoria RAM</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
 
-        // Cerrar la conexión
-        $conexion->close();
-        ?>
+            <!-- Memoria RAM -->
+            <label for="memoriaRam">MEMORIA RAM:</label>
+            <select id="memoriaRam" name="memoriaRam" disabled>
+                <option value="" disabled selected>Selecciona tu memoria RAM</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
 
-        <!-- Modal -->
-        <div id="detalleProductoModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="cerrarModal()">&times;</span>
 
-                <!-- Primera Columna -->
-                <div class="columna">
-                    <h2 id="nombreProductoModal"></h2>
-                    <img id="imagenProductoModal" alt="Imagen del producto">
-                    <p id="precioProductoModal"></p>
-                </div>
+            <!-- Almacenamiento 1 -->
+            <label for="almacenamiento1">ALMACENAMIENTO:</label>
+            <select id="almacenamiento1" name="almacenamiento1"></select>
+            <span id="precioAlmacenamiento1"></span>
 
-                <!-- Segunda Columna -->
-                <div class="columna">
-                    <p id="stockProductoModal"></p>
-                    <p id="descripcionProductoModal"></p>
-                    <a id="enlaceProductoModal" href="#" target="_blank">Enlace</a>
-                </div>
-            </div>
-        </div>
+            <!-- Almacenamiento 2 -->
+            <label for="almacenamiento2">ALMACENAMIENTO:</label>
+            <select id="almacenamiento2" name="almacenamiento2"></select>
+            <span id="precioAlmacenamiento2"></span>
 
+
+
+            <!-- Tarjeta de Video -->
+            <label for="tarjetaVideo">TARJETA DE VIDEO:</label>
+            <select id="tarjetaVideo" name="tarjetaVideo">
+                <option value="" disabled selected>Selecciona tu tarjeta de video</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+
+            <!-- Fuente de Poder -->
+            <label for="fuentePoder">FUENTE DE PODER:</label>
+            <select id="fuentePoder" name="fuentePoder">
+                <option value="" disabled selected>Selecciona tu fuente de poder</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+
+            <!-- Case -->
+            <label for="case">CASE:</label>
+            <select id="case" name="case">
+                <option value="" disabled selected>Selecciona tu case</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Monitor -->
+            <label for="monitor">MONITOR:</label>
+            <select id="monitor" name="monitor">
+                <option value="" disabled selected>Selecciona tu monitor</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Teclado -->
+            <label for="teclado">TECLADO:</label>
+            <select id="teclado" name="teclado">
+                <option value="" disabled selected>Selecciona tu teclado</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Mouse -->
+            <label for="mouse">MOUSE:</label>
+            <select id="mouse" name="mouse">
+                <option value="" disabled selected>Selecciona tu mouse</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Audifono -->
+            <label for="audifono">AUDIFONO:</label>
+            <select id="audifono" name="audifono">
+                <option value="" disabled selected>Selecciona tu audifono</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Accesorio -->
+            <label for="accesorio">ACCESORIO:</label>
+            <select id="accesorio" name="accesorio">
+                <option value="" disabled selected>Selecciona tu accesorio</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Accesorio -->
+            <label for="accesorio">ACCESORIO:</label>
+            <select id="accesorio" name="accesorio">
+                <option value="" disabled selected>Selecciona tu accesorio</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Accesorio -->
+            <label for="accesorio">ACCESORIO:</label>
+            <select id="accesorio" name="accesorio">
+                <option value="" disabled selected>Selecciona tu accesorio</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Accesorio -->
+            <label for="accesorio">ACCESORIO:</label>
+            <select id="accesorio" name="accesorio">
+                <option value="" disabled selected>Selecciona tu accesorio</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <!-- Refrigeracion -->
+            <label for="refrigeracion">REFRIGERACION:</label>
+            <select id="refrigeracion" name="refrigeracion">
+                <option value="" disabled selected>Selecciona tu refrigeracion</option>
+                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
+            </select>
+
+            <button type="button" onclick="generarCotizacion()">Generar Cotización</button>
+        </form>
+
+        <div id="resultado-cotizacion"></div>
 
     </main>
 
@@ -171,8 +230,7 @@
         <p>&copy; 2023 La Bruja Store. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/index_producto.js"></script>
-
+    <script src="index_producto.js"></script>
 </body>
 
 </html>

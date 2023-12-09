@@ -92,134 +92,127 @@ include('conexiondb/conexion.php');
             <h1>COTIZA TU PC AQUI</h1>
 
             <!-- Procesador -->
-            <label for="procesador">PROCESADOR:</label>
-            <select id="procesadorSelect" name="procesador"></select>
-            <span id="precioProcesador"></span>
-
-
+            <div class="cotizacion-item">
+                <label for="procesador">PROCESADOR:</label>
+                <select id="procesadorSelect" name="procesador"></select>
+                <span id="precioProcesador" class="precioSpan"></span>
+            </div>
 
             <!-- Placa Base -->
-            <label for="placaBase">PLACA:</label>
-            <select id="placaBase" name="placaBase" disabled>
-                <option value="" disabled selected>Selecciona tu placa</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
-
-
-            <!-- Memoria RAM -->
-            <label for="memoriaRam">MEMORIA RAM:</label>
-            <select id="memoriaRam" name="memoriaRam" disabled>
-                <option value="" disabled selected>Selecciona tu memoria RAM</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="placaBase">PLACA:</label>
+                <select id="placaBase" name="placaBase" disabled></select>
+                <span id="precioPlacaBase" class="precioSpan"></span>
+            </div>
 
             <!-- Memoria RAM -->
-            <label for="memoriaRam">MEMORIA RAM:</label>
-            <select id="memoriaRam" name="memoriaRam" disabled>
-                <option value="" disabled selected>Selecciona tu memoria RAM</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
-
+            <div class="cotizacion-item">
+                <label for="memoriaRam">MEMORIA RAM:</label>
+                <select id="memoriaRam" name="memoriaRam" disabled></select>
+                <span id="precioMemoriaRam" class="precioSpan"></span>
+            </div>
 
             <!-- Almacenamiento 1 -->
-            <label for="almacenamiento1">ALMACENAMIENTO:</label>
-            <select id="almacenamiento1" name="almacenamiento1"></select>
-            <span id="precioAlmacenamiento1"></span>
+            <div class="cotizacion-item">
+                <label for="almacenamiento1">ALMACENAMIENTO:</label>
+                <select id="almacenamiento1" name="almacenamiento1"></select>
+                <span id="precioAlmacenamiento1" class="precioSpan"></span>
+            </div>
 
             <!-- Almacenamiento 2 -->
-            <label for="almacenamiento2">ALMACENAMIENTO:</label>
-            <select id="almacenamiento2" name="almacenamiento2"></select>
-            <span id="precioAlmacenamiento2"></span>
-
-
+            <div class="cotizacion-item">
+                <label for="almacenamiento2">ALMACENAMIENTO:</label>
+                <select id="almacenamiento2" name="almacenamiento2"></select>
+                <span id="precioAlmacenamiento2" class="precioSpan"></span>
+            </div>
 
             <!-- Tarjeta de Video -->
-            <label for="tarjetaVideo">TARJETA DE VIDEO:</label>
-            <select id="tarjetaVideo" name="tarjetaVideo">
-                <option value="" disabled selected>Selecciona tu tarjeta de video</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
-
+            <div class="cotizacion-item">
+                <label for="tarjetaVideo">TARJETA DE VIDEO:</label>
+                <select id="tarjetaVideo" name="tarjetaVideo"></select>
+                <span id="precioTarjetaVideo" class="precioSpan"></span>
+            </div>
 
             <!-- Fuente de Poder -->
-            <label for="fuentePoder">FUENTE DE PODER:</label>
-            <select id="fuentePoder" name="fuentePoder">
-                <option value="" disabled selected>Selecciona tu fuente de poder</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
-
+            <div class="cotizacion-item">
+                <label for="fuentePoder">FUENTE DE PODER:</label>
+                <select id="fuentePoder" name="fuentePoder"></select>
+                <span id="precioFuentePoder" class="precioSpan"></span>
+            </div>
 
             <!-- Case -->
-            <label for="case">CASE:</label>
-            <select id="case" name="case">
-                <option value="" disabled selected>Selecciona tu case</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="case">CASE:</label>
+                <select id="case" name="case"></select>
+                <span id="precioCase" class="precioSpan"></span>
+            </div>
 
             <!-- Monitor -->
-            <label for="monitor">MONITOR:</label>
-            <select id="monitor" name="monitor">
-                <option value="" disabled selected>Selecciona tu monitor</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="monitor">MONITOR:</label>
+                <select id="monitor" name="monitor"></select>
+                <span id="precioMonitor" class="precioSpan"></span>
+            </div>
 
             <!-- Teclado -->
-            <label for="teclado">TECLADO:</label>
-            <select id="teclado" name="teclado">
-                <option value="" disabled selected>Selecciona tu teclado</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="teclado">TECLADO:</label>
+                <select id="teclado" name="teclado"></select>
+                <span id="precioTeclado" class="precioSpan"></span>
+            </div>
 
             <!-- Mouse -->
-            <label for="mouse">MOUSE:</label>
-            <select id="mouse" name="mouse">
-                <option value="" disabled selected>Selecciona tu mouse</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="mouse">MOUSE:</label>
+                <select id="mouse" name="mouse"></select>
+                <span id="precioMouse" class="precioSpan"></span>
+            </div>
 
             <!-- Audifono -->
-            <label for="audifono">AUDIFONO:</label>
-            <select id="audifono" name="audifono">
-                <option value="" disabled selected>Selecciona tu audifono</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="audifono">AUDIFONO:</label>
+                <select id="audifono" name="audifono"></select>
+                <span id="precioAudifono" class="precioSpan"></span>
+            </div>
 
-            <!-- Accesorio -->
-            <label for="accesorio">ACCESORIO:</label>
-            <select id="accesorio" name="accesorio">
-                <option value="" disabled selected>Selecciona tu accesorio</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <!-- Accesorio 1 -->
+            <div class="cotizacion-item">
+                <label for="accesorio1">ACCESORIO:</label>
+                <select id="accesorio1" name="accesorio1"></select>
+                <span id="precioAccesorio1" class="precioSpan"></span>
+            </div>
 
-            <!-- Accesorio -->
-            <label for="accesorio">ACCESORIO:</label>
-            <select id="accesorio" name="accesorio">
-                <option value="" disabled selected>Selecciona tu accesorio</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <!-- Accesorio 2 -->
+            <div class="cotizacion-item">
+                <label for="accesorio2">ACCESORIO:</label>
+                <select id="accesorio2" name="accesorio2"></select>
+                <span id="precioAccesorio2" class="precioSpan"></span>
+            </div>
 
-            <!-- Accesorio -->
-            <label for="accesorio">ACCESORIO:</label>
-            <select id="accesorio" name="accesorio">
-                <option value="" disabled selected>Selecciona tu accesorio</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <!-- Accesorio 3 -->
+            <div class="cotizacion-item">
+                <label for="accesorio3">ACCESORIO:</label>
+                <select id="accesorio3" name="accesorio3"></select>
+                <span id="precioAccesorio3" class="precioSpan"></span>
+            </div>
 
-            <!-- Accesorio -->
-            <label for="accesorio">ACCESORIO:</label>
-            <select id="accesorio" name="accesorio">
-                <option value="" disabled selected>Selecciona tu accesorio</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <!-- Accesorio 4 -->
+            <div class="cotizacion-item">
+                <label for="accesorio4">ACCESORIO:</label>
+                <select id="accesorio4" name="accesorio4"></select>
+                <span id="precioAccesorio4" class="precioSpan"></span>
+            </div>
 
             <!-- Refrigeracion -->
-            <label for="refrigeracion">REFRIGERACION:</label>
-            <select id="refrigeracion" name="refrigeracion">
-                <option value="" disabled selected>Selecciona tu refrigeracion</option>
-                <!-- Opciones serán cargadas dinámicamente con JavaScript -->
-            </select>
+            <div class="cotizacion-item">
+                <label for="refrigeracion">REFRIGERACION:</label>
+                <select id="refrigeracion" name="refrigeracion"></select>
+                <span id="precioRefrigeracion" class="precioSpan"></span>
+            </div>
+
 
             <button type="button" onclick="generarCotizacion()">Generar Cotización</button>
+            <span id="precioTotal"></span>
         </form>
 
         <div id="resultado-cotizacion"></div>

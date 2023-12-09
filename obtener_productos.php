@@ -1,14 +1,15 @@
 <?php
 include('conexiondb/conexion.php');
 
-$query = "SELECT * FROM procesador";
-$result = $conexion->query($query);
+// Consulta para obtener los procesadores
+$queryProcesadores = "SELECT * FROM procesador";
+$resultProcesadores = $conexion->query($queryProcesadores);
 
 $procesadores = array();
 
-while ($row = $result->fetch_assoc()) {
+while ($row = $resultProcesadores->fetch_assoc()) {
     $procesador = array(
-        'Id_Procesador' => $row['Id_Procesador'],
+        'Id' => $row['Id_Procesador'],
         'Nombre' => $row['Nombre'],
         'Precio' => $row['Precio']
     );
@@ -16,5 +17,27 @@ while ($row = $result->fetch_assoc()) {
     $procesadores[] = $procesador;
 }
 
-echo json_encode($procesadores);
+// Consulta para obtener los almacenamientos
+$queryAlmacenamientos = "SELECT * FROM almacenamiento";
+$resultAlmacenamientos = $conexion->query($queryAlmacenamientos);
+
+$almacenamientos = array();
+
+while ($row = $resultAlmacenamientos->fetch_assoc()) {
+    $almacenamiento = array(
+        'Id' => $row['Id_Almacenamiento'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $almacenamientos[] = $almacenamiento;
+}
+
+// Combinar datos de procesadores y almacenamientos
+$datosCombinados = array(
+    'procesadores' => $procesadores,
+    'almacenamientos' => $almacenamientos
+);
+
+echo json_encode($datosCombinados);
 ?>

@@ -50,25 +50,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-    <form method="post" action="">
-        <div class="wrapper">
+<form method="post" action="" class="login-form">
+        <div class="form-wrapper">
 
-            <div class="user-container">
-                <label class="label-cont" for="usuario">Usuario:</label>
+            <h1>Iniciar Sesión</h1>
+
+            <div class="input-container">
+                <label for="usuario">Usuario</label>
                 <input type="text" id="usuario" name="usuario" required>
             </div>
-            <div class="password-container">
-                <label class="label-cont" for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-                <span class="toggle-password" onclick="togglePassword()"><i class="fa-regular fa-eye"></i></span>
+            <div class="input-container">
+                <label for="contrasena">Contraseña</label>
+                <div class="password-input">
+                    <input type="password" id="contrasena" name="contrasena" required>
+                    <span class="toggle-password"></span>
+                </div>
             </div>
 
-            <button class="submit" type="submit">Iniciar Sesion</button>
-
-            <a href="../index.php" type="button" class="button">Salir</a>
+            <div class="button-container">
+                <button class="submit-button" type="submit">Iniciar Sesión</button>
+                <a href="../index.php" class="exit-button">Salir</a>
+            </div>
 
         </div>
-
     </form>
 
     <script src="../js/login.js"></script>

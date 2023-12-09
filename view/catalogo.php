@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizaciones</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/catalogo_header.css">
     <link rel="stylesheet" href="../css/catalogo.css">
 </head>
 
@@ -15,7 +15,7 @@
 
         <!-- Logo o imagen -->
         <div id="header-img-logo">
-            <a href="../index.php"><img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa"></a>
+            <a href="index.php"><img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa"></a>
         </div>
 
         <!-- Botones -->
@@ -47,7 +47,7 @@
 
             <!-- Barra de 3 lineas -->
             <div class="bloque-icon-tres-lineas">
-                <img id="icon-tres-lineas" src="img/icon/tres-lineas.png" alt="Icono de menu 3 lineas">
+                <img id="icon-tres-lineas" src="../img/icon/tres-lineas.png" alt="Icono de menu 3 lineas">
 
                 <div class="opciones-lista">
                     <a class="cont-lista" href="#">Cotización</a>
@@ -87,7 +87,7 @@
 
         <!-- Logo la derecha -->
         <div id="header-img-logo-right">
-            <img id="header-cont-img-logo" src="img/labrujastore.png" alt="Logo de la empresa">
+            <img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa">
         </div>
         <!-- TIENES QUE AL DAR CLICK EN LA LUPA QUE SE ABRA EL BUSCADOR -->
     </header>
@@ -110,7 +110,7 @@
             // Verificar si la consulta fue exitosa
             if ($result->num_rows > 0) {
                 // Mostrar el título de la categoría
-                echo '<h1>' . $categoria . '</h1>';
+                echo '<h1 class="titulo-categoria">' . $categoria . '</h1>';
 
                 // Contador para seguir la pista de productos por fila
                 $productosEnFila = 0;
@@ -129,14 +129,12 @@
                     $descripcionConSaltosDeLinea = nl2br($producto['Descripcion']);
 
                     // Mostrar cada producto en una tarjeta
-                    echo '<div class="card">';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $producto['Nombre'] . '</h5>';
                     // Ajusta la ruta de la imagen
                     echo '<img src="' . $imagenRuta . '" alt="' . $producto['Nombre'] . '" class="card-img-top">';
                     echo '<p class="card-text">' . $producto['Precio'] . '</p>';
-                    echo '<a href="#" data-descripcion="' . htmlspecialchars($producto['Descripcion']) . '" onclick="abrirModal(this, \'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
-                    echo '</div>';
+                    echo '<a class="card-info" href="#" data-descripcion="' . htmlspecialchars($producto['Descripcion']) . '" onclick="abrirModal(this, \'' . $producto['Nombre'] . '\', \'' . $imagenRuta . '\', \'' . $producto['Precio'] . '\', \'' . $producto['Stock'] . '\', \'' . $producto['Enlace'] . '\')">Ver detalles</a>';
                     echo '</div>';
 
                     // Incrementar el contador de productos en la fila
@@ -175,7 +173,7 @@
                 <div class="columna">
                     <p id="stockProductoModal"></p>
                     <p id="descripcionProductoModal"></p>
-                    <a id="enlaceProductoModal" href="#" target="_blank">Enlace</a>
+                    <a id="enlaceProductoModal" href="#" target="_blank">SABER MÁS DEL PRODUCTO</a>
                 </div>
             </div>
         </div>

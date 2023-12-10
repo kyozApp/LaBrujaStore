@@ -11,6 +11,10 @@ $(document).ready(function () {
     var tecladoSelect = $('#teclado');
     var mouseSelect = $('#mouse');
     var audifonoSelect = $('#audifono');
+    var accesorio1Select = $('#accesorio1');
+    var accesorio2Select = $('#accesorio2');
+    var accesorio3Select = $('#accesorio3');
+    var accesorio4Select = $('#accesorio4');
     var refrigeracionSelect = $('#refrigeracion');
 
     var precioProcesadorSpan = $('#precioProcesador');
@@ -23,6 +27,10 @@ $(document).ready(function () {
     var precioTecladoSpan = $('#precioTeclado');
     var precioMouseSpan = $('#precioMouse');
     var precioAudifonoSpan = $('#precioAudifono');
+    var precioAccesorio1Span = $('#precioAccesorio1');
+    var precioAccesorio2Span = $('#precioAccesorio2');
+    var precioAccesorio3Span = $('#precioAccesorio3');
+    var precioAccesorio4Span = $('#precioAccesorio4');
     var precioRefrigeracionSpan = $('#precioRefrigeracion');
 
     var data; // Variable para almacenar los datos de procesadores, almacenamientos y tarjetas de video
@@ -61,6 +69,10 @@ $(document).ready(function () {
             llenarSelect(tecladoSelect, data.teclados);
             llenarSelect(mouseSelect, data.mouses);
             llenarSelect(audifonoSelect, data.audifonos);
+            llenarSelect(accesorio1Select, data.accesorios);
+            llenarSelect(accesorio2Select, data.accesorios);
+            llenarSelect(accesorio3Select, data.accesorios);
+            llenarSelect(accesorio4Select, data.accesorios);
             llenarSelect(refrigeracionSelect, data.refrigeraciones);
 
             // Habilitar los selectores
@@ -74,6 +86,10 @@ $(document).ready(function () {
             tecladoSelect.prop('disabled', false);
             mouseSelect.prop('disabled', false);
             audifonoSelect.prop('disabled', false);
+            accesorio1Select.prop('disabled', false);
+            accesorio2Select.prop('disabled', false);
+            accesorio3Select.prop('disabled', false);
+            accesorio4Select.prop('disabled', false);
             refrigeracionSelect.prop('disabled', false);
         },
         error: function (error) {
@@ -82,147 +98,242 @@ $(document).ready(function () {
     });
 
     // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video, fuentes de poder, cases, monitores, teclados, mouses, audífonos y refrigeraciones
-    procesadorSelect.change(function() {
-        mostrarPrecioSeleccionado(procesadorSelect, precioProcesadorSpan);
+    // Agregar evento change al selector de procesador
+    procesadorSelect.change(function () {
+        // Obtener el ID del procesador seleccionado
+        var procesadorSeleccionadoId = $(this).val();
+
+        // Realizar solicitud AJAX al servidor para obtener las placas compatibles con el procesador seleccionado
+        $.ajax({
+            url: 'obtener_placas_compatibles.php', // Reemplaza 'obtener_placas_compatibles.php' por la ruta correcta a tu archivo PHP que obtiene las placas compatibles
+            type: 'GET',
+            dataType: 'json',
+            data: { procesadorId: procesadorSeleccionadoId }, // Enviar el ID del procesador seleccionado al servidor
+            success: function (response) {
+                // Actualizar el selector de placas con las opciones compatibles obtenidas del servidor
+                llenarSelect(placaBaseSelect, response.placasCompatibles);
+            },
+            error: function (error) {
+                console.log('Error al obtener placas compatibles:', error);
+            }
+        });
     });
 
-    almacenamiento1Select.change(function() {
-        mostrarPrecioSeleccionado(almacenamiento1Select, precioAlmacenamiento1Span);
+
+    almacenamiento1Select.change(function () {
+        mostrarPrecioSeleccionado(almacenamiento1Select, precioAlmacenamiento1Span, 'almacenamiento');
     });
 
-    almacenamiento2Select.change(function() {
-        mostrarPrecioSeleccionado(almacenamiento2Select, precioAlmacenamiento2Span);
+    almacenamiento2Select.change(function () {
+        mostrarPrecioSeleccionado(almacenamiento2Select, precioAlmacenamiento2Span, 'almacenamiento');
     });
 
-    tarjetaVideoSelect.change(function() {
-        mostrarPrecioSeleccionado(tarjetaVideoSelect, precioTarjetaVideoSpan);
+    tarjetaVideoSelect.change(function () {
+        mostrarPrecioSeleccionado(tarjetaVideoSelect, precioTarjetaVideoSpan, 'tarjetaVideo');
     });
 
-    fuentePoderSelect.change(function() {
-        mostrarPrecioSeleccionado(fuentePoderSelect, precioFuentePoderSpan);
+    fuentePoderSelect.change(function () {
+        mostrarPrecioSeleccionado(fuentePoderSelect, precioFuentePoderSpan, 'fuentePoder');
     });
 
-    casesSelect.change(function() {
-        mostrarPrecioSeleccionado(casesSelect, precioCasesSpan);
+    casesSelect.change(function () {
+        mostrarPrecioSeleccionado(casesSelect, precioCasesSpan, 'cases');
     });
 
-    monitorSelect.change(function() {
-        mostrarPrecioSeleccionado(monitorSelect, precioMonitorSpan);
+    monitorSelect.change(function () {
+        mostrarPrecioSeleccionado(monitorSelect, precioMonitorSpan, 'monitor');
     });
 
-    tecladoSelect.change(function() {
-        mostrarPrecioSeleccionado(tecladoSelect, precioTecladoSpan);
+    tecladoSelect.change(function () {
+        mostrarPrecioSeleccionado(tecladoSelect, precioTecladoSpan, 'teclado');
     });
 
-    mouseSelect.change(function() {
-        mostrarPrecioSeleccionado(mouseSelect, precioMouseSpan);
+    mouseSelect.change(function () {
+        mostrarPrecioSeleccionado(mouseSelect, precioMouseSpan, 'mouse');
     });
 
-    audifonoSelect.change(function() {
-        mostrarPrecioSeleccionado(audifonoSelect, precioAudifonoSpan);
+    audifonoSelect.change(function () {
+        mostrarPrecioSeleccionado(audifonoSelect, precioAudifonoSpan, 'audifono');
     });
 
-    refrigeracionSelect.change(function() {
-        mostrarPrecioSeleccionado(refrigeracionSelect, precioRefrigeracionSpan);
+    accesorio1Select.change(function () {
+        mostrarPrecioSeleccionado(accesorio1Select, precioAccesorio1Span, 'accesorio');
     });
+
+    accesorio2Select.change(function () {
+        mostrarPrecioSeleccionado(accesorio2Select, precioAccesorio2Span, 'accesorio');
+    });
+
+    accesorio3Select.change(function () {
+        mostrarPrecioSeleccionado(accesorio3Select, precioAccesorio3Span, 'accesorio');
+    });
+
+    accesorio4Select.change(function () {
+        mostrarPrecioSeleccionado(accesorio4Select, precioAccesorio4Span, 'accesorio');
+    });
+
+    refrigeracionSelect.change(function () {
+        mostrarPrecioSeleccionado(refrigeracionSelect, precioRefrigeracionSpan, 'refrigeracion');
+    });
+
+    // Variable para almacenar los precios seleccionados
+    var preciosSeleccionados = {
+        procesador: 0,
+        almacenamiento1: 0,
+        almacenamiento2: 0,
+        tarjetaVideo: 0,
+        fuentePoder: 0,
+        cases: 0,
+        monitor: 0,
+        teclado: 0,
+        mouse: 0,
+        audifono: 0,
+        accesorio1: 0,
+        accesorio2: 0,
+        accesorio3: 0,
+        accesorio4: 0,
+        refrigeracion: 0
+
+        // Agrega más campos para otros productos si es necesario
+    };
 
     // Función para mostrar el precio del elemento seleccionado en el span correspondiente
-    function mostrarPrecioSeleccionado(selector, span) {
+    function mostrarPrecioSeleccionado(selector, span, tipoProducto) {
         // Obtener el valor seleccionado
         var elementoId = selector.val();
+        var elementoSeleccionado;
 
-        // Buscar el elemento seleccionado en el array de datos
-        var elementoSeleccionado = data.procesadores
-            .concat(data.almacenamientos)
-            .concat(data.tarjetasVideo)
-            .concat(data.fuentesPoder)
-            .concat(data.cases)
-            .concat(data.monitores)
-            .concat(data.teclados)
-            .concat(data.mouses)
-            .concat(data.audifonos)
-            .concat(data.refrigeraciones)
-            .find(function(elemento) {
-                return elemento.Id == elementoId;
-            });
+        // Buscar el elemento seleccionado en el array de datos correspondiente al tipo de producto
+        switch (tipoProducto) {
+            case 'procesador':
+                elementoSeleccionado = data.procesadores.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'almacenamiento':
+                elementoSeleccionado = data.almacenamientos.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'tarjetaVideo':
+                elementoSeleccionado = data.tarjetasVideo.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'fuentePoder':
+                elementoSeleccionado = data.fuentesPoder.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'cases':
+                elementoSeleccionado = data.cases.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'monitor':
+                elementoSeleccionado = data.monitores.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'teclado':
+                elementoSeleccionado = data.teclados.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'mouse':
+                elementoSeleccionado = data.mouses.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'audifono':
+                elementoSeleccionado = data.audifonos.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'accesorio':
+                elementoSeleccionado = data.accesorios.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            case 'refrigeracion':
+                elementoSeleccionado = data.refrigeraciones.find(function (elemento) {
+                    return elemento.Id == elementoId;
+                });
+                break;
+            // Agregar otros casos según los tipos de productos disponibles
+            // ...
+            default:
+                elementoSeleccionado = null;
+        }
 
-        // Mostrar el precio del elemento dentro del span
-        span.text('Precio: ' + elementoSeleccionado.Precio);
+        if (elementoSeleccionado) {
+            // Mostrar el precio del elemento dentro del span
+            span.text('Precio: ' + elementoSeleccionado.Precio);
+
+            // Actualizar el precio correspondiente en el objeto de precios seleccionados
+            switch (tipoProducto) {
+                case 'procesador':
+                    preciosSeleccionados.procesador = elementoSeleccionado.Precio;
+                    break;
+                case 'almacenamiento':
+                    // Verificar si es almacenamiento1 o almacenamiento2
+                    if (selector.is('#almacenamiento1')) {
+                        preciosSeleccionados.almacenamiento1 = elementoSeleccionado.Precio;
+                    } else {
+                        preciosSeleccionados.almacenamiento2 = elementoSeleccionado.Precio;
+                    }
+                    break;
+                case 'tarjetaVideo':
+                    preciosSeleccionados.tarjetaVideo = elementoSeleccionado.Precio;
+                    break;
+                case 'fuentePoder':
+                    preciosSeleccionados.fuentePoder = elementoSeleccionado.Precio;
+                    break;
+                case 'cases':
+                    preciosSeleccionados.cases = elementoSeleccionado.Precio;
+                    break;
+                case 'monitor':
+                    preciosSeleccionados.monitor = elementoSeleccionado.Precio;
+                    break;
+                case 'teclado':
+                    preciosSeleccionados.teclado = elementoSeleccionado.Precio;
+                    break;
+                case 'mouse':
+                    preciosSeleccionados.mouse = elementoSeleccionado.Precio;
+                    break;
+                case 'audifono':
+                    preciosSeleccionados.audifono = elementoSeleccionado.Precio;
+                    break;
+                case 'accesorio':
+                    if (selector.is('#accesorio1')) {
+                        preciosSeleccionados.accesorio1 = elementoSeleccionado.Precio;
+                    } else if (selector.is('#accesorio2')) {
+                        preciosSeleccionados.accesorio2 = elementoSeleccionado.Precio;
+                    } else if (selector.is('#accesorio3')) {
+                        preciosSeleccionados.accesorio3 = elementoSeleccionado.Precio;
+                    } else if (selector.is('#accesorio4')) {
+                        preciosSeleccionados.accesorio4 = elementoSeleccionado.Precio;
+                    }
+                    break;
+
+                case 'refrigeracion':
+                    preciosSeleccionados.refrigeracion = elementoSeleccionado.Precio;
+                    break;
+                // Agregar otros casos según los tipos de productos disponibles
+                // ...
+                default:
+                // Manejar otro tipo de productos si es necesario
+            }
+
+            // Actualizar el precio total
+            actualizarPrecioTotal();
+        }
     }
+
+
 });
 
 
-// ... (código anterior)
-
-// Variable para almacenar los precios seleccionados
-var precioProcesador = 0;
-var precioAlmacenamiento1 = 0;
-var precioAlmacenamiento2 = 0;
-
-// Función para actualizar el precio total
-function actualizarPrecioTotal() {
-    var precioTotal = precioProcesador + precioAlmacenamiento1 + precioAlmacenamiento2;
-    $('#precioTotal').text('Precio Total: ' + precioTotal);
-}
-
-// Agregar un evento change al selector de procesadores
-procesadorSelect.change(function () {
-    // Obtener el valor seleccionado del procesador
-    var procesadorId = $(this).val();
-
-    // Buscar el procesador seleccionado en el array de datos
-    var procesadorSeleccionado = data.procesadores.find(function (procesador) {
-        return procesador.Id == procesadorId;
-    });
-
-    // Almacenar el precio del procesador seleccionado
-    precioProcesador = procesadorSeleccionado.Precio;
-
-    // Mostrar el precio del procesador dentro del elemento span
-    precioProcesadorSpan.text('Precio: ' + precioProcesador);
-
-    // Actualizar el precio total
-    actualizarPrecioTotal();
-});
-
-// Agregar eventos change a los selectores de almacenamientos
-almacenamiento1Select.change(function () {
-    // Obtener el valor seleccionado del almacenamiento1
-    var almacenamiento1Id = $(this).val();
-
-    // Buscar el almacenamiento1 seleccionado en el array de datos
-    var almacenamiento1Seleccionado = data.almacenamientos.find(function (almacenamiento) {
-        return almacenamiento.Id == almacenamiento1Id;
-    });
-
-    // Almacenar el precio del almacenamiento1 seleccionado
-    precioAlmacenamiento1 = almacenamiento1Seleccionado.Precio;
-
-    // Mostrar el precio del almacenamiento1 dentro del elemento span
-    precioAlmacenamiento1Span.text('Precio: ' + precioAlmacenamiento1);
-
-    // Actualizar el precio total
-    actualizarPrecioTotal();
-});
-
-almacenamiento2Select.change(function () {
-    // Obtener el valor seleccionado del almacenamiento2
-    var almacenamiento2Id = $(this).val();
-
-    // Buscar el almacenamiento2 seleccionado en el array de datos
-    var almacenamiento2Seleccionado = data.almacenamientos.find(function (almacenamiento) {
-        return almacenamiento.Id == almacenamiento2Id;
-    });
-
-    // Almacenar el precio del almacenamiento2 seleccionado
-    precioAlmacenamiento2 = almacenamiento2Seleccionado.Precio;
-
-    // Mostrar el precio del almacenamiento2 dentro del elemento span
-    precioAlmacenamiento2Span.text('Precio: ' + precioAlmacenamiento2);
-
-    // Actualizar el precio total
-    actualizarPrecioTotal();
-});
 
 // Función para mostrar el precio del elemento seleccionado en el span correspondiente
 function mostrarPrecioSeleccionado(selector, span, tipoPrecio) {
@@ -249,5 +360,3 @@ function mostrarPrecioSeleccionado(selector, span, tipoPrecio) {
 function generarCotizacion() {
     // Tu lógica para generar la cotización aquí
 }
-
-// ... (resto del código)

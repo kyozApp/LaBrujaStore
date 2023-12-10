@@ -75,9 +75,10 @@ include('conexiondb/conexion.php');
                 </div>
             </div>
             <div class="botones-cont div-formulario">
-                <form class="-segundo" action="/ruta_de_busqueda" method="GET">
-                    <input class="buscar-text" type="text" name="busqueda" placeholder="Buscar...">
-                    <button class="buscar-boton" type="submit">Buscar</button>
+                <!-- Barra de búsqueda -->
+                <form class="-segundo" action="#" method="GET" onsubmit="return false;">
+                    <input class="buscar-text" type="text" id="busquedaInput" placeholder="Buscar...">
+                    <button class="buscar-boton" type="submit" onclick="buscarProductos()">Buscar</button>
                 </form>
             </div>
         </div>
@@ -203,6 +204,7 @@ include('conexiondb/conexion.php');
                 <span id="precioAccesorio4" class="precioSpan"></span>
             </div>
 
+
             <!-- Refrigeracion -->
             <div class="cotizacion-item">
                 <label for="refrigeracion">REFRIGERACION:</label>
@@ -224,6 +226,7 @@ include('conexiondb/conexion.php');
     </footer>
 
     <script src="index_producto.js"></script>
+    <script src="js/buscar.js"></script>
 </body>
 
 </html>

@@ -142,6 +142,21 @@ while ($row = $resultAudifonos->fetch_assoc()) {
     $audifonos[] = $audifono;
 }
 
+$queryAccesorios = "SELECT * FROM accesorio";
+$resultAccesorios = $conexion->query($queryAccesorios);
+
+$accesorios = array();
+
+while ($row = $resultAccesorios->fetch_assoc()) {
+    $accesorio = array(
+        'Id' => $row['Id_Accesorio'],
+        'Nombre' => $row['Nombre'],
+        'Precio' => $row['Precio']
+    );
+
+    $accesorios[] = $accesorio;
+}
+
 $queryRefrigeraciones = "SELECT * FROM refrigeracion";
 $resultRefrigeraciones = $conexion->query($queryRefrigeraciones);
 
@@ -168,6 +183,7 @@ $datosCombinados = array(
     'teclados' => $teclados,
     'mouses' => $mouses,
     'audifonos' => $audifonos,
+    'accesorios' => $accesorios,
     'refrigeraciones' => $refrigeraciones
 );
 

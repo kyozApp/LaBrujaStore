@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var precio = parseFloat(selectedOption.dataset.precio);
 
             // Muestra el precio en el span correspondiente
-            precioSpan.textContent = 'Precio: $' + precio.toFixed(2);
+            precioSpan.textContent = 'Precio: $' + (isNaN(precio) ? 0 : precio.toFixed(2));
 
             // Actualiza el precio total
             actualizarPrecioSelect(selectId, precio);
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Muestra los detalles por consola
             console.log('ID ' + selectId + ': ' + selectedOption.value);
             console.log('Producto ' + selectId + ': ' + selectedOption.text);
-            console.log('Precio ' + selectId + ': $' + precio.toFixed(2));
+            console.log('Precio ' + selectId + ': $' + (isNaN(precio) ? 0 : precio.toFixed(2)));
         });
     }
 

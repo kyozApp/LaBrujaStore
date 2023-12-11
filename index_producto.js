@@ -11,14 +11,11 @@ function mostrarPlacasCompatibles() {
 
             // Actualiza las opciones del select de placas
             var selectPlaca = document.getElementById('productosPlaca');
-            selectPlaca.innerHTML = '<option value="" selected>Selecciona una placa</option>';
+            selectPlaca.innerHTML = '<option value="" selected>Selecciona un procesador primero</option>';
 
             for (var i = 0; i < placas.length; i++) {
                 selectPlaca.innerHTML += '<option value="' + placas[i].Precio + '">' + placas[i].Producto + '</option>';
             }
-
-            // Muestra el precio de la placa seleccionada
-            mostrarPrecio('precioPlaca', selectPlaca);
         }
     };
 
@@ -26,34 +23,6 @@ function mostrarPlacasCompatibles() {
     xmlhttp.send();
 }
 
-function mostrarMemoriasRAMCompatibles() {
-    // Obtiene el valor seleccionado del select de placas
-    var idPlaca = document.getElementById('productosPlaca').value;
-
-    // Realiza la consulta para obtener las memorias RAM compatibles con la placa seleccionada
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            // Parsea la respuesta JSON
-            var memoriasRAM = JSON.parse(this.responseText);
-
-            // Actualiza las opciones del select de memorias RAM
-            var selectMemoriaRAM = document.getElementById('productosMemoriaRAM');
-            selectMemoriaRAM.innerHTML = '<option value="" selected>Selecciona una placa primero</option>';
-
-            for (var i = 0; i < memoriasRAM.length; i++) {
-                selectMemoriaRAM.innerHTML += '<option value="' + memoriasRAM[i].Precio + '">' + memoriasRAM[i].Producto + '</option>';
-            }
-        }
-    };
-
-    xmlhttp.open("GET", "obtener_memorias_ram_compatibles.php?id_placa=" + idPlaca, true);
-    xmlhttp.send();
-}
-
-
-
-// Dentro del archivo index_producto.js
 
 function mostrarPrecio(spanId, selectElement) {
     // Obtiene el valor seleccionado del select
@@ -64,14 +33,12 @@ function mostrarPrecio(spanId, selectElement) {
 
     // Calcula la suma total de precios
     var totalProcesador = parseFloat(document.getElementById('productosProcesador').value) || 0;
-    var totalPlaca = parseFloat(document.getElementById('productosPlaca').value) || 0;
-    var totalMemoriaRAM = parseFloat(document.getElementById('productosMemoriaRAM').value) || 0;
     var totalAlmacenamiento1 = parseFloat(document.getElementById('productosAlmacenamiento1').value) || 0;
     var totalAlmacenamiento2 = parseFloat(document.getElementById('productosAlmacenamiento2').value) || 0;
- 
-    var sumaTotal = totalProcesador + totalPlaca + totalMemoriaRAM + totalAlmacenamiento1 + totalAlmacenamiento2 ;
+    var totalPlaca = parseFloat(document.getElementById('productosPlaca').value) || 0;
+
+    var sumaTotal = totalProcesador + totalAlmacenamiento1 + totalAlmacenamiento2 + totalPlaca;
 
     // Muestra la suma total
     document.getElementById('sumaTotal').innerHTML = 'Suma Total: ' + sumaTotal.toFixed(2);
 }
-

@@ -6,18 +6,13 @@ include('conexiondb/conexion.php');
 $queryProcesador = "SELECT Producto, Precio, Id_Procesador FROM procesador";
 $resultProcesador = $conexion->query($queryProcesador);
 
-// Realiza la consulta para obtener todos los productos y precios de placa
-$queryPlaca = "SELECT Producto, Precio, Id_Procesador FROM placa";
-$resultPlaca = $conexion->query($queryPlaca);
-
-// Realiza la consulta para obtener todos los productos y precios de memoria RAM
-$queryMemoriaRAM = "SELECT Producto, Precio, Id_Placa FROM memoria_ram";
-$resultMemoriaRAM = $conexion->query($queryMemoriaRAM);
-
 // Realiza la consulta para obtener todos los productos y precios de almacenamiento
 $queryAlmacenamiento = "SELECT Producto, Precio, Id_Almacenamiento FROM almacenamiento";
 $resultAlmacenamiento = $conexion->query($queryAlmacenamiento);
 
+// Realiza la consulta para obtener todos los productos y precios de placa
+$queryPlaca = "SELECT Producto, Precio, Id_Procesador FROM placa";
+$resultPlaca = $conexion->query($queryPlaca);
 ?>
 
 <!DOCTYPE html>
@@ -48,36 +43,21 @@ $resultAlmacenamiento = $conexion->query($queryAlmacenamiento);
                 <option value="" selected>Selecciona un procesador</option>
                 <?php
                 while ($row = $resultProcesador->fetch_assoc()) {
-                    echo '<option value="' . $row['Id_Procesador'] . '">' . $row['Producto'] . '</option>';
+                    echo '<option value="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
                 }
                 ?>
             </select>
             <span id="precioProcesador">Precio: </span>
         </form>
 
-
         <!-- Formulario de selección para placas -->
         <form>
             <label for="productosPlaca">Placa:</label>
-            <select id="productosPlaca" name="productosPlaca" onchange="mostrarPrecio('precioPlaca', this); mostrarMemoriasRAMCompatibles()">
+            <select id="productosPlaca" name="productosPlaca" onchange="mostrarPrecio('precioPlaca', this)">
                 <option value="" selected>Selecciona un procesador primero</option>
-                <!-- ... (resto del código de la selección de placas) ... -->
             </select>
             <span id="precioPlaca">Precio: </span>
         </form>
-
-
-        <!-- Formulario de selección para memoria RAM -->
-        <form>
-            <label for="productosMemoriaRAM">Memoria RAM:</label>
-            <select id="productosMemoriaRAM" name="productosMemoriaRAM" onchange="mostrarPrecio('precioMemoriaRAM', this)">
-                <option value="" selected>Selecciona una placa primero</option>
-            </select>
-            <span id="precioMemoriaRAM">Precio: </span>
-        </form>
-
-
-
 
         <!-- Formulario de selección para almacenamiento (1) -->
         <form>
@@ -111,7 +91,6 @@ $resultAlmacenamiento = $conexion->query($queryAlmacenamiento);
             </select>
             <span id="precioAlmacenamiento2">Precio: </span>
         </form>
-
 
         <span id="sumaTotal">Suma Total: 0.00</span>
 

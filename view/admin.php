@@ -15,9 +15,6 @@ include('../conexiondb/conexion.php');
 $query = "SELECT * FROM Producto";
 $result = $conexion->query($query);
 
-// Realizar una consulta para obtener la información de cotizaciones
-$queryCotizaciones = "SELECT * FROM Cotizacion";
-$resultCotizaciones = $conexion->query($queryCotizaciones);
 
 // Verificar si la consulta fue exitosa
 if (!$result) {
@@ -71,29 +68,6 @@ if (!$result) {
                 <td><a href="modificar_producto.php?id=<?= $row['Id_Producto'] ?>"><i class="fas fa-pen"></i></a></td>
                 <td><a href="borrar_producto.php?id=<?= $row['Id_Producto'] ?>"><i class="fas fa-trash"></i></a></td>
 
-            </tr>
-        <?php endwhile; ?>
-    </table>
-
-    <table>
-        <h2>Tabla de Cotización</h2>
-        <p><a class="button" href="nuevo_cotizacion.php">Crear</a></p>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Imagen</th>
-            <th>Categoría</th>
-            <td></td>
-            <td></td>
-        </tr>
-        <?php while ($row = $resultCotizaciones->fetch_assoc()) : ?>
-            <tr>
-                <td><?= $row['Id_Cotizacion']; ?></td>
-                <td><?= $row['Nombre']; ?></td>
-                <td><img src="<?= $row['Imagen']; ?>" alt="Imagen de <?= $row['Nombre']; ?>" style="max-width: 100px;"></td>
-                <td><?= $row['Categoria']; ?></td>
-                <td><a href="modificar_cotizacion.php?id=<?= $row['Id_Cotizacion'] ?>"><i class="fas fa-pen"></i></a></td>
-                <td><a href="borrar_cotizacion.php?id=<?= $row['Id_Cotizacion'] ?>"><i class="fas fa-trash"></i></a></td>
             </tr>
         <?php endwhile; ?>
     </table>

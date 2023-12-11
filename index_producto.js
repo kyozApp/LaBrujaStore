@@ -1,362 +1,77 @@
-// Cuando el documento esté listo
-$(document).ready(function () {
-    // Obtener los selectores y spans de procesadores, almacenamientos, tarjetas de video, fuentes de poder, cases, monitores, teclados, mouses, audífonos y refrigeraciones
-    var procesadorSelect = $('#procesadorSelect');
-    var almacenamiento1Select = $('#almacenamiento1');
-    var almacenamiento2Select = $('#almacenamiento2');
-    var tarjetaVideoSelect = $('#tarjetaVideo');
-    var fuentePoderSelect = $('#fuentePoder');
-    var casesSelect = $('#cases');
-    var monitorSelect = $('#monitor');
-    var tecladoSelect = $('#teclado');
-    var mouseSelect = $('#mouse');
-    var audifonoSelect = $('#audifono');
-    var accesorio1Select = $('#accesorio1');
-    var accesorio2Select = $('#accesorio2');
-    var accesorio3Select = $('#accesorio3');
-    var accesorio4Select = $('#accesorio4');
-    var refrigeracionSelect = $('#refrigeracion');
+function mostrarPlacasCompatibles() {
+    // Obtiene el valor seleccionado del select de procesadores
+    var idProcesador = document.getElementById('productosProcesador').value;
 
-    var precioProcesadorSpan = $('#precioProcesador');
-    var precioAlmacenamiento1Span = $('#precioAlmacenamiento1');
-    var precioAlmacenamiento2Span = $('#precioAlmacenamiento2');
-    var precioTarjetaVideoSpan = $('#precioTarjetaVideo');
-    var precioFuentePoderSpan = $('#precioFuentePoder');
-    var precioCasesSpan = $('#precioCases');
-    var precioMonitorSpan = $('#precioMonitor');
-    var precioTecladoSpan = $('#precioTeclado');
-    var precioMouseSpan = $('#precioMouse');
-    var precioAudifonoSpan = $('#precioAudifono');
-    var precioAccesorio1Span = $('#precioAccesorio1');
-    var precioAccesorio2Span = $('#precioAccesorio2');
-    var precioAccesorio3Span = $('#precioAccesorio3');
-    var precioAccesorio4Span = $('#precioAccesorio4');
-    var precioRefrigeracionSpan = $('#precioRefrigeracion');
+    // Realiza la consulta para obtener las placas compatibles con el procesador seleccionado
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // Parsea la respuesta JSON
+            var placas = JSON.parse(this.responseText);
 
-    var data; // Variable para almacenar los datos de procesadores, almacenamientos y tarjetas de video
+            // Actualiza las opciones del select de placas
+            var selectPlaca = document.getElementById('productosPlaca');
+            selectPlaca.innerHTML = '<option value="" selected>Selecciona una placa</option>';
 
-    // Realizar una solicitud AJAX para obtener los nombres y precios de procesadores, almacenamientos y tarjetas de video desde la base de datos
-    $.ajax({
-        url: 'obtener_productos.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            // Almacenar los datos de procesadores, almacenamientos y tarjetas de video en la variable data
-            data = response;
-
-            // Función para llenar un select con opciones
-            function llenarSelect(select, opciones) {
-                // Limpiar opciones existentes
-                select.empty();
-
-                // Agregar la opción predeterminada
-                select.append('<option value="" disabled selected>Selecciona...</option>');
-
-                // Agregar cada opción al select
-                $.each(opciones, function (index, opcion) {
-                    select.append('<option value="' + opcion.Id + '">' + opcion.Nombre + '</option>');
-                });
+            for (var i = 0; i < placas.length; i++) {
+                selectPlaca.innerHTML += '<option value="' + placas[i].Precio + '">' + placas[i].Producto + '</option>';
             }
 
-            // Llenar los selectores con datos
-            llenarSelect(procesadorSelect, data.procesadores);
-            llenarSelect(almacenamiento1Select, data.almacenamientos);
-            llenarSelect(almacenamiento2Select, data.almacenamientos);
-            llenarSelect(tarjetaVideoSelect, data.tarjetasVideo);
-            llenarSelect(fuentePoderSelect, data.fuentesPoder);
-            llenarSelect(casesSelect, data.cases);
-            llenarSelect(monitorSelect, data.monitores);
-            llenarSelect(tecladoSelect, data.teclados);
-            llenarSelect(mouseSelect, data.mouses);
-            llenarSelect(audifonoSelect, data.audifonos);
-            llenarSelect(accesorio1Select, data.accesorios);
-            llenarSelect(accesorio2Select, data.accesorios);
-            llenarSelect(accesorio3Select, data.accesorios);
-            llenarSelect(accesorio4Select, data.accesorios);
-            llenarSelect(refrigeracionSelect, data.refrigeraciones);
-
-            // Habilitar los selectores
-            procesadorSelect.prop('disabled', false);
-            almacenamiento1Select.prop('disabled', false);
-            almacenamiento2Select.prop('disabled', false);
-            tarjetaVideoSelect.prop('disabled', false);
-            fuentePoderSelect.prop('disabled', false);
-            casesSelect.prop('disabled', false);
-            monitorSelect.prop('disabled', false);
-            tecladoSelect.prop('disabled', false);
-            mouseSelect.prop('disabled', false);
-            audifonoSelect.prop('disabled', false);
-            accesorio1Select.prop('disabled', false);
-            accesorio2Select.prop('disabled', false);
-            accesorio3Select.prop('disabled', false);
-            accesorio4Select.prop('disabled', false);
-            refrigeracionSelect.prop('disabled', false);
-        },
-        error: function (error) {
-            console.log('Error al obtener datos:', error);
+            // Muestra el precio de la placa seleccionada
+            mostrarPrecio('precioPlaca', selectPlaca);
         }
-    });
-
-    // Agregar eventos change a los selectores de procesadores, almacenamientos, tarjetas de video, fuentes de poder, cases, monitores, teclados, mouses, audífonos y refrigeraciones
-    // Agregar evento change al selector de procesador
-    procesadorSelect.change(function () {
-        // Obtener el ID del procesador seleccionado
-        var procesadorSeleccionadoId = $(this).val();
-
-        // Realizar solicitud AJAX al servidor para obtener las placas compatibles con el procesador seleccionado
-        $.ajax({
-            url: 'obtener_placas_compatibles.php', // Reemplaza 'obtener_placas_compatibles.php' por la ruta correcta a tu archivo PHP que obtiene las placas compatibles
-            type: 'GET',
-            dataType: 'json',
-            data: { procesadorId: procesadorSeleccionadoId }, // Enviar el ID del procesador seleccionado al servidor
-            success: function (response) {
-                // Actualizar el selector de placas con las opciones compatibles obtenidas del servidor
-                llenarSelect(placaBaseSelect, response.placasCompatibles);
-            },
-            error: function (error) {
-                console.log('Error al obtener placas compatibles:', error);
-            }
-        });
-    });
-
-
-    almacenamiento1Select.change(function () {
-        mostrarPrecioSeleccionado(almacenamiento1Select, precioAlmacenamiento1Span, 'almacenamiento');
-    });
-
-    almacenamiento2Select.change(function () {
-        mostrarPrecioSeleccionado(almacenamiento2Select, precioAlmacenamiento2Span, 'almacenamiento');
-    });
-
-    tarjetaVideoSelect.change(function () {
-        mostrarPrecioSeleccionado(tarjetaVideoSelect, precioTarjetaVideoSpan, 'tarjetaVideo');
-    });
-
-    fuentePoderSelect.change(function () {
-        mostrarPrecioSeleccionado(fuentePoderSelect, precioFuentePoderSpan, 'fuentePoder');
-    });
-
-    casesSelect.change(function () {
-        mostrarPrecioSeleccionado(casesSelect, precioCasesSpan, 'cases');
-    });
-
-    monitorSelect.change(function () {
-        mostrarPrecioSeleccionado(monitorSelect, precioMonitorSpan, 'monitor');
-    });
-
-    tecladoSelect.change(function () {
-        mostrarPrecioSeleccionado(tecladoSelect, precioTecladoSpan, 'teclado');
-    });
-
-    mouseSelect.change(function () {
-        mostrarPrecioSeleccionado(mouseSelect, precioMouseSpan, 'mouse');
-    });
-
-    audifonoSelect.change(function () {
-        mostrarPrecioSeleccionado(audifonoSelect, precioAudifonoSpan, 'audifono');
-    });
-
-    accesorio1Select.change(function () {
-        mostrarPrecioSeleccionado(accesorio1Select, precioAccesorio1Span, 'accesorio');
-    });
-
-    accesorio2Select.change(function () {
-        mostrarPrecioSeleccionado(accesorio2Select, precioAccesorio2Span, 'accesorio');
-    });
-
-    accesorio3Select.change(function () {
-        mostrarPrecioSeleccionado(accesorio3Select, precioAccesorio3Span, 'accesorio');
-    });
-
-    accesorio4Select.change(function () {
-        mostrarPrecioSeleccionado(accesorio4Select, precioAccesorio4Span, 'accesorio');
-    });
-
-    refrigeracionSelect.change(function () {
-        mostrarPrecioSeleccionado(refrigeracionSelect, precioRefrigeracionSpan, 'refrigeracion');
-    });
-
-    // Variable para almacenar los precios seleccionados
-    var preciosSeleccionados = {
-        procesador: 0,
-        almacenamiento1: 0,
-        almacenamiento2: 0,
-        tarjetaVideo: 0,
-        fuentePoder: 0,
-        cases: 0,
-        monitor: 0,
-        teclado: 0,
-        mouse: 0,
-        audifono: 0,
-        accesorio1: 0,
-        accesorio2: 0,
-        accesorio3: 0,
-        accesorio4: 0,
-        refrigeracion: 0
-
-        // Agrega más campos para otros productos si es necesario
     };
 
-    // Función para mostrar el precio del elemento seleccionado en el span correspondiente
-    function mostrarPrecioSeleccionado(selector, span, tipoProducto) {
-        // Obtener el valor seleccionado
-        var elementoId = selector.val();
-        var elementoSeleccionado;
+    xmlhttp.open("GET", "obtener_placas_compatibles.php?id_procesador=" + idProcesador, true);
+    xmlhttp.send();
+}
 
-        // Buscar el elemento seleccionado en el array de datos correspondiente al tipo de producto
-        switch (tipoProducto) {
-            case 'procesador':
-                elementoSeleccionado = data.procesadores.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'almacenamiento':
-                elementoSeleccionado = data.almacenamientos.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'tarjetaVideo':
-                elementoSeleccionado = data.tarjetasVideo.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'fuentePoder':
-                elementoSeleccionado = data.fuentesPoder.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'cases':
-                elementoSeleccionado = data.cases.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'monitor':
-                elementoSeleccionado = data.monitores.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'teclado':
-                elementoSeleccionado = data.teclados.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'mouse':
-                elementoSeleccionado = data.mouses.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'audifono':
-                elementoSeleccionado = data.audifonos.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'accesorio':
-                elementoSeleccionado = data.accesorios.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            case 'refrigeracion':
-                elementoSeleccionado = data.refrigeraciones.find(function (elemento) {
-                    return elemento.Id == elementoId;
-                });
-                break;
-            // Agregar otros casos según los tipos de productos disponibles
-            // ...
-            default:
-                elementoSeleccionado = null;
-        }
+function mostrarMemoriasRAMCompatibles() {
+    // Obtiene el valor seleccionado del select de placas
+    var idPlaca = document.getElementById('productosPlaca').value;
 
-        if (elementoSeleccionado) {
-            // Mostrar el precio del elemento dentro del span
-            span.text('Precio: ' + elementoSeleccionado.Precio);
+    // Realiza la consulta para obtener las memorias RAM compatibles con la placa seleccionada
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // Parsea la respuesta JSON
+            var memoriasRAM = JSON.parse(this.responseText);
 
-            // Actualizar el precio correspondiente en el objeto de precios seleccionados
-            switch (tipoProducto) {
-                case 'procesador':
-                    preciosSeleccionados.procesador = elementoSeleccionado.Precio;
-                    break;
-                case 'almacenamiento':
-                    // Verificar si es almacenamiento1 o almacenamiento2
-                    if (selector.is('#almacenamiento1')) {
-                        preciosSeleccionados.almacenamiento1 = elementoSeleccionado.Precio;
-                    } else {
-                        preciosSeleccionados.almacenamiento2 = elementoSeleccionado.Precio;
-                    }
-                    break;
-                case 'tarjetaVideo':
-                    preciosSeleccionados.tarjetaVideo = elementoSeleccionado.Precio;
-                    break;
-                case 'fuentePoder':
-                    preciosSeleccionados.fuentePoder = elementoSeleccionado.Precio;
-                    break;
-                case 'cases':
-                    preciosSeleccionados.cases = elementoSeleccionado.Precio;
-                    break;
-                case 'monitor':
-                    preciosSeleccionados.monitor = elementoSeleccionado.Precio;
-                    break;
-                case 'teclado':
-                    preciosSeleccionados.teclado = elementoSeleccionado.Precio;
-                    break;
-                case 'mouse':
-                    preciosSeleccionados.mouse = elementoSeleccionado.Precio;
-                    break;
-                case 'audifono':
-                    preciosSeleccionados.audifono = elementoSeleccionado.Precio;
-                    break;
-                case 'accesorio':
-                    if (selector.is('#accesorio1')) {
-                        preciosSeleccionados.accesorio1 = elementoSeleccionado.Precio;
-                    } else if (selector.is('#accesorio2')) {
-                        preciosSeleccionados.accesorio2 = elementoSeleccionado.Precio;
-                    } else if (selector.is('#accesorio3')) {
-                        preciosSeleccionados.accesorio3 = elementoSeleccionado.Precio;
-                    } else if (selector.is('#accesorio4')) {
-                        preciosSeleccionados.accesorio4 = elementoSeleccionado.Precio;
-                    }
-                    break;
+            // Actualiza las opciones del select de memorias RAM
+            var selectMemoriaRAM = document.getElementById('productosMemoriaRAM');
+            selectMemoriaRAM.innerHTML = '<option value="" selected>Selecciona una placa primero</option>';
 
-                case 'refrigeracion':
-                    preciosSeleccionados.refrigeracion = elementoSeleccionado.Precio;
-                    break;
-                // Agregar otros casos según los tipos de productos disponibles
-                // ...
-                default:
-                // Manejar otro tipo de productos si es necesario
+            for (var i = 0; i < memoriasRAM.length; i++) {
+                selectMemoriaRAM.innerHTML += '<option value="' + memoriasRAM[i].Precio + '">' + memoriasRAM[i].Producto + '</option>';
             }
-
-            // Actualizar el precio total
-            actualizarPrecioTotal();
         }
-    }
+    };
 
-
-});
-
-
-
-// Función para mostrar el precio del elemento seleccionado en el span correspondiente
-function mostrarPrecioSeleccionado(selector, span, tipoPrecio) {
-    // Obtener el valor seleccionado
-    var elementoId = selector.val();
-
-    // Buscar el elemento seleccionado en el array de datos
-    var elementoSeleccionado = tipoPrecio == 'procesador' ?
-        data.procesadores.find(function (elemento) {
-            return elemento.Id == elementoId;
-        }) :
-        data.almacenamientos.find(function (elemento) {
-            return elemento.Id == elementoId;
-        });
-
-    // Mostrar el precio del elemento dentro del span
-    span.text('Precio: ' + elementoSeleccionado.Precio);
-
-    // Actualizar el precio total
-    actualizarPrecioTotal();
+    xmlhttp.open("GET", "obtener_memorias_ram_compatibles.php?id_placa=" + idPlaca, true);
+    xmlhttp.send();
 }
 
-// Función para generar la cotización
-function generarCotizacion() {
-    // Tu lógica para generar la cotización aquí
+
+
+// Dentro del archivo index_producto.js
+
+function mostrarPrecio(spanId, selectElement) {
+    // Obtiene el valor seleccionado del select
+    var precio = parseFloat(selectElement.value) || 0;
+
+    // Actualiza el contenido del span con el precio seleccionado
+    document.getElementById(spanId).innerHTML = 'Precio: ' + precio.toFixed(2);
+
+    // Calcula la suma total de precios
+    var totalProcesador = parseFloat(document.getElementById('productosProcesador').value) || 0;
+    var totalPlaca = parseFloat(document.getElementById('productosPlaca').value) || 0;
+    var totalMemoriaRAM = parseFloat(document.getElementById('productosMemoriaRAM').value) || 0;
+    var totalAlmacenamiento1 = parseFloat(document.getElementById('productosAlmacenamiento1').value) || 0;
+    var totalAlmacenamiento2 = parseFloat(document.getElementById('productosAlmacenamiento2').value) || 0;
+ 
+    var sumaTotal = totalProcesador + totalPlaca + totalMemoriaRAM + totalAlmacenamiento1 + totalAlmacenamiento2 ;
+
+    // Muestra la suma total
+    document.getElementById('sumaTotal').innerHTML = 'Suma Total: ' + sumaTotal.toFixed(2);
 }
+

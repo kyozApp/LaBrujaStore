@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var precioAlmacenamiento1 = document.getElementById('precioAlmacenamiento1');
 
     // Obtener elementos de almacenamiento2
-    var selectAlmacenamiento = document.getElementById('selectAlmacenamiento2');
-    var precioAlmacenamiento = document.getElementById('precioAlmacenamiento2');
+    var selectAlmacenamiento2 = document.getElementById('selectAlmacenamiento2');
+    var precioAlmacenamiento2 = document.getElementById('precioAlmacenamiento2');
 
     // Obtener elementos de tarjeta de video
     var selectTarjetaDeVideo = document.getElementById('selectTarjetaDeVideo');
@@ -42,20 +42,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var precioAudifono = document.getElementById('precioAudifono');
 
     // Obtener elementos de accesorio 1
-    var selectAccesorio = document.getElementById('selectAccesorio1');
-    var precioAccesorio = document.getElementById('precioAccesorio1');
+    var selectAccesorio1 = document.getElementById('selectAccesorio1');
+    var precioAccesorio1 = document.getElementById('precioAccesorio1');
 
     // Obtener elementos de accesorio 2
-    var selectAccesorio = document.getElementById('selectAccesorio2');
-    var precioAccesorio = document.getElementById('precioAccesorio2');
+    var selectAccesorio2 = document.getElementById('selectAccesorio2');
+    var precioAccesorio2 = document.getElementById('precioAccesorio2');
 
     // Obtener elementos de accesorio 3
-    var selectAccesorio = document.getElementById('selectAccesorio3');
-    var precioAccesorio = document.getElementById('precioAccesorio3');
+    var selectAccesorio3 = document.getElementById('selectAccesorio3');
+    var precioAccesorio3 = document.getElementById('precioAccesorio3');
 
     // Obtener elementos de accesorio 4
-    var selectAccesorio = document.getElementById('selectAccesorio4');
-    var precioAccesorio = document.getElementById('precioAccesorio4');
+    var selectAccesorio4 = document.getElementById('selectAccesorio4');
+    var precioAccesorio4 = document.getElementById('precioAccesorio4');
 
     // Obtener elementos de refrigeracion
     var selectRefrigeracion = document.getElementById('selectRefrigeracion');

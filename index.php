@@ -2,17 +2,41 @@
 // Incluye el archivo de conexión a la base de datos
 include('conexiondb/conexion.php');
 
-// Realiza la consulta para obtener todos los productos y precios de procesador
-$queryProcesador = "SELECT Producto, Precio, Id_Procesador FROM procesador";
+// Realiza una consulta para obtener los productos de la tabla procesador
+$queryProcesador = "SELECT Id_Procesador, Producto, Precio FROM procesador";
 $resultProcesador = $conexion->query($queryProcesador);
 
-// Realiza la consulta para obtener todos los productos y precios de almacenamiento
-$queryAlmacenamiento = "SELECT Producto, Precio, Id_Almacenamiento FROM almacenamiento";
+// Verifica si la consulta fue exitosa para procesador
+if ($resultProcesador) {
+    // Crea el elemento de selección con los productos obtenidos de la base de datos para procesador
+    $optionsProcesador = '<option value="" selected>Seleccionar un procesador</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultProcesador->fetch_assoc()) {
+        $optionsProcesador .= '<option value="' . $row['Id_Procesador'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    }
+} else {
+    // Maneja el caso de error en la consulta para procesador
+    $optionsProcesador = '<option value="">Error al obtener los productos de procesador</option>';
+}
+
+// Realiza una consulta para obtener los productos de la tabla procesador
+$queryAlmacenamiento = "SELECT Id_Almacenamiento, Producto, Precio FROM almacenamiento";
 $resultAlmacenamiento = $conexion->query($queryAlmacenamiento);
 
-// Realiza la consulta para obtener todos los productos y precios de placa
-$queryPlaca = "SELECT Producto, Precio, Id_Procesador FROM placa";
-$resultPlaca = $conexion->query($queryPlaca);
+// Verifica si la consulta fue exitosa para almacenamiento
+if ($resultAlmacenamiento) {
+    // Crea el elemento de selección con los productos obtenidos de la base de datos para almacenamiento
+    $optionsAlmacenamiento = '<option value="" selected>Seleccionar un almacenamiento</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAlmacenamiento->fetch_assoc()) {
+        $optionsAlmacenamiento .= '<option value="' . $row['Id_Almacenamiento'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    }
+} else {
+    // Maneja el caso de error en la consulta para almacenamiento
+    $optionsAlmacenamiento = '<option value="">Error al obtener los productos de almacenamiento</option>';
+}
+
+
+// Cierra la conexión a la base de datos
+$conexion->close();
 ?>
 
 <!DOCTYPE html>
@@ -24,8 +48,6 @@ $resultPlaca = $conexion->query($queryPlaca);
     <title>Tienda La Bruja Store</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/index_producto.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="index_producto.js"></script>
 </head>
 
 <body>
@@ -34,72 +56,32 @@ $resultPlaca = $conexion->query($queryPlaca);
     </header>
 
     <main class="body-cont">
-        <!-- Contenido de tu página -->
-
-        <!-- Formulario de selección para procesador -->
+        <!-- Agrega un formulario con el select -->
         <form>
-            <label for="productosProcesador">Procesador:</label>
-            <select id="productosProcesador" name="productosProcesador" onchange="mostrarPlacasCompatibles(); mostrarPrecio('precioProcesador', this)">
-                <option value="" selected>Selecciona un procesador</option>
-                <?php
-                while ($row = $resultProcesador->fetch_assoc()) {
-                    echo '<option value="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
-                }
-                ?>
+            <label for="selectProcesador">Procesador:</label>
+            <select id="selectProcesador">
+                <?php echo $optionsProcesador; ?>
             </select>
-            <span id="precioProcesador">Precio: </span>
+
+            <!-- Agregado: Span para mostrar el precio -->
+            <span id="precioProcesador"></span>
+
+            <label for="selectAlmacenamiento">Almacenamiento:</label>
+            <select id="selectAlmacenamiento">
+                <?php echo $optionsAlmacenamiento; ?>
+            </select>
+
+            <!-- Agregado: Span para mostrar el precio -->
+            <span id="precioAlmacenamiento"></span>
         </form>
 
-        <!-- Formulario de selección para placas -->
-        <form>
-            <label for="productosPlaca">Placa:</label>
-            <select id="productosPlaca" name="productosPlaca" onchange="mostrarPrecio('precioPlaca', this)">
-                <option value="" selected>Selecciona un procesador primero</option>
-            </select>
-            <span id="precioPlaca">Precio: </span>
-        </form>
-
-        <!-- Formulario de selección para almacenamiento (1) -->
-        <form>
-            <label for="productosAlmacenamiento1">Almacenamiento (1):</label>
-            <select id="productosAlmacenamiento1" name="productosAlmacenamiento1" onchange="mostrarPrecio('precioAlmacenamiento1', this)">
-                <option value="" selected>Selecciona un producto de almacenamiento</option>
-                <?php
-                // Recorre los resultados y muestra cada producto como una opción en el select
-                while ($row = $resultAlmacenamiento->fetch_assoc()) {
-                    echo '<option value="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
-                }
-                ?>
-            </select>
-            <span id="precioAlmacenamiento1">Precio: </span>
-        </form>
-
-        <!-- Formulario de selección para almacenamiento (2) -->
-        <form>
-            <label for="productosAlmacenamiento2">Almacenamiento (2):</label>
-            <select id="productosAlmacenamiento2" name="productosAlmacenamiento2" onchange="mostrarPrecio('precioAlmacenamiento2', this)">
-                <option value="" selected>Selecciona un producto de almacenamiento</option>
-                <?php
-                // Vuelve a realizar la consulta para almacenamiento
-                $resultAlmacenamiento = $conexion->query($queryAlmacenamiento);
-
-                // Recorre los resultados y muestra cada producto como una opción en el select
-                while ($row = $resultAlmacenamiento->fetch_assoc()) {
-                    echo '<option value="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
-                }
-                ?>
-            </select>
-            <span id="precioAlmacenamiento2">Precio: </span>
-        </form>
-
-        <span id="sumaTotal">Suma Total: 0.00</span>
-
-        <!-- Otro contenido de tu página -->
     </main>
 
     <footer>
         <p>&copy; 2023 La Bruja Store. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="index_producto.js"></script>
 </body>
 
 </html>

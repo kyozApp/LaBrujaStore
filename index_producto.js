@@ -1,44 +1,37 @@
-function mostrarPlacasCompatibles() {
-    // Obtiene el valor seleccionado del select de procesadores
-    var idProcesador = document.getElementById('productosProcesador').value;
+// index_producto.js
 
-    // Realiza la consulta para obtener las placas compatibles con el procesador seleccionado
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            // Parsea la respuesta JSON
-            var placas = JSON.parse(this.responseText);
+document.addEventListener('DOMContentLoaded', function () {
+    var selectProcesador = document.getElementById('selectProcesador');
+    var precioProcesador = document.getElementById('precioProcesador');
 
-            // Actualiza las opciones del select de placas
-            var selectPlaca = document.getElementById('productosPlaca');
-            selectPlaca.innerHTML = '<option value="" selected>Selecciona un procesador primero</option>';
+    // Agrega un evento de cambio al select de procesador
+    selectProcesador.addEventListener('change', function () {
+        // Obtiene la opción seleccionada
+        var selectedOption = selectProcesador.options[selectProcesador.selectedIndex];
 
-            for (var i = 0; i < placas.length; i++) {
-                selectPlaca.innerHTML += '<option value="' + placas[i].Precio + '">' + placas[i].Producto + '</option>';
-            }
-        }
-    };
+        // Muestra la información en la consola
+        console.log('ID Procesador: ' + selectedOption.value);
+        console.log('Producto Procesador: ' + selectedOption.text);
+        console.log('Precio Procesador: $' + selectedOption.dataset.precio);
 
-    xmlhttp.open("GET", "obtener_placas_compatibles.php?id_procesador=" + idProcesador, true);
-    xmlhttp.send();
-}
+        // Muestra el precio en el span de procesador
+        precioProcesador.textContent = 'Precio: $' + selectedOption.dataset.precio;
+    });
 
+    var selectAlmacenamiento = document.getElementById('selectAlmacenamiento');
+    var precioAlmacenamiento = document.getElementById('precioAlmacenamiento');
 
-function mostrarPrecio(spanId, selectElement) {
-    // Obtiene el valor seleccionado del select
-    var precio = parseFloat(selectElement.value) || 0;
+    // Agrega un evento de cambio al select de almacenamiento
+    selectAlmacenamiento.addEventListener('change', function () {
+        // Obtiene la opción seleccionada
+        var selectedOption = selectAlmacenamiento.options[selectAlmacenamiento.selectedIndex];
 
-    // Actualiza el contenido del span con el precio seleccionado
-    document.getElementById(spanId).innerHTML = 'Precio: ' + precio.toFixed(2);
+        // Muestra la información en la consola
+        console.log('ID Almacenamiento: ' + selectedOption.value);
+        console.log('Producto Almacenamiento: ' + selectedOption.text);
+        console.log('Precio Almacenamiento: $' + selectedOption.dataset.precio);
 
-    // Calcula la suma total de precios
-    var totalProcesador = parseFloat(document.getElementById('productosProcesador').value) || 0;
-    var totalAlmacenamiento1 = parseFloat(document.getElementById('productosAlmacenamiento1').value) || 0;
-    var totalAlmacenamiento2 = parseFloat(document.getElementById('productosAlmacenamiento2').value) || 0;
-    var totalPlaca = parseFloat(document.getElementById('productosPlaca').value) || 0;
-
-    var sumaTotal = totalProcesador + totalAlmacenamiento1 + totalAlmacenamiento2 + totalPlaca;
-
-    // Muestra la suma total
-    document.getElementById('sumaTotal').innerHTML = 'Suma Total: ' + sumaTotal.toFixed(2);
-}
+        // Muestra el precio en el span de almacenamiento
+        precioAlmacenamiento.textContent = 'Precio: $' + selectedOption.dataset.precio;
+    });
+});

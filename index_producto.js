@@ -4,9 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener elementos de procesador
     var selectProcesador = document.getElementById('selectProcesador');
     var precioProcesador = document.getElementById('precioProcesador');
-    // Obtener elementos de almacenamiento
-    var selectAlmacenamiento = document.getElementById('selectAlmacenamiento');
-    var precioAlmacenamiento = document.getElementById('precioAlmacenamiento');
+
+    // Obtener elementos de almacenamiento1
+    var selectAlmacenamiento1 = document.getElementById('selectAlmacenamiento1');
+    var precioAlmacenamiento1 = document.getElementById('precioAlmacenamiento1');
+
+    // Obtener elementos de almacenamiento2
+    var selectAlmacenamiento = document.getElementById('selectAlmacenamiento2');
+    var precioAlmacenamiento = document.getElementById('precioAlmacenamiento2');
 
     // Obtener elementos de tarjeta de video
     var selectTarjetaDeVideo = document.getElementById('selectTarjetaDeVideo');
@@ -36,9 +41,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var selectAudifono = document.getElementById('selectAudifono');
     var precioAudifono = document.getElementById('precioAudifono');
 
-    // Obtener elementos de accesorio
-    var selectAccesorio = document.getElementById('selectAccesorio');
-    var precioAccesorio = document.getElementById('precioAccesorio');
+    // Obtener elementos de accesorio 1
+    var selectAccesorio = document.getElementById('selectAccesorio1');
+    var precioAccesorio = document.getElementById('precioAccesorio1');
+
+    // Obtener elementos de accesorio 2
+    var selectAccesorio = document.getElementById('selectAccesorio2');
+    var precioAccesorio = document.getElementById('precioAccesorio2');
+
+    // Obtener elementos de accesorio 3
+    var selectAccesorio = document.getElementById('selectAccesorio3');
+    var precioAccesorio = document.getElementById('precioAccesorio3');
+
+    // Obtener elementos de accesorio 4
+    var selectAccesorio = document.getElementById('selectAccesorio4');
+    var precioAccesorio = document.getElementById('precioAccesorio4');
 
     // Obtener elementos de refrigeracion
     var selectRefrigeracion = document.getElementById('selectRefrigeracion');
@@ -51,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Agregado: Variables para almacenar los precios de cada select
     var precios = {
         'procesador': 0,
-        'almacenamiento': 0,
+        'almacenamiento1': 0,
+        'almacenamiento2': 0,
         'tarjetaDeVideo': 0,
         'fuenteDePoder': 0,
         'cases': 0,
@@ -59,7 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
         'teclado': 0,
         'mouse': 0,
         'audifono': 0,
-        'accesorio': 0,
+        'accesorio1': 0,
+        'accesorio2': 0,
+        'accesorio3': 0,
+        'accesorio4': 0,
         'refrigeracion': 0
     };
 
@@ -73,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Agregado: Función para actualizar el precio de un select específico
     function actualizarPrecioSelect(selectId, precio) {
-        precios[selectId] = precio;
+        precios[selectId] = isNaN(precio) ? 0 : precio;
         actualizarPrecioTotal();
     }
 
@@ -101,7 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Llama a la función para manejar el cambio en cada select
     manejarCambioSelect('selectProcesador', 'precioProcesador');
-    manejarCambioSelect('selectAlmacenamiento', 'precioAlmacenamiento');
+    manejarCambioSelect('selectAlmacenamiento1', 'precioAlmacenamiento1');
+    manejarCambioSelect('selectAlmacenamiento2', 'precioAlmacenamiento2');
     manejarCambioSelect('selectTarjetaDeVideo', 'precioTarjetaDeVideo');
     manejarCambioSelect('selectFuenteDePoder', 'precioFuenteDePoder');
     manejarCambioSelect('selectCases', 'precioCases');
@@ -109,7 +131,10 @@ document.addEventListener('DOMContentLoaded', function () {
     manejarCambioSelect('selectTeclado', 'precioTeclado');
     manejarCambioSelect('selectMouse', 'precioMouse');
     manejarCambioSelect('selectAudifono', 'precioAudifono');
-    manejarCambioSelect('selectAccesorio', 'precioAccesorio');
+    manejarCambioSelect('selectAccesorio1', 'precioAccesorio1');
+    manejarCambioSelect('selectAccesorio2', 'precioAccesorio2');
+    manejarCambioSelect('selectAccesorio3', 'precioAccesorio3');
+    manejarCambioSelect('selectAccesorio4', 'precioAccesorio4');
     manejarCambioSelect('selectRefrigeracion', 'precioRefrigeracion');
 
 });

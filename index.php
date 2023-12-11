@@ -19,19 +19,35 @@ if ($resultProcesador) {
 }
 
 // Realiza una consulta para obtener los productos de la tabla almacenamiento
-$queryAlmacenamiento = "SELECT Id_Almacenamiento, Producto, Precio FROM almacenamiento";
-$resultAlmacenamiento = $conexion->query($queryAlmacenamiento);
+$queryAlmacenamiento1 = "SELECT Id_Almacenamiento, Producto, Precio FROM almacenamiento";
+$resultAlmacenamiento1 = $conexion->query($queryAlmacenamiento1);
 
 // Verifica si la consulta fue exitosa para almacenamiento
-if ($resultAlmacenamiento) {
+if ($resultAlmacenamiento1) {
     // Crea el elemento de selección con los productos obtenidos de la base de datos para almacenamiento
-    $optionsAlmacenamiento = '<option value="" selected>Seleccionar un almacenamiento</option>'; // Agregado: opción predeterminada seleccionable
-    while ($row = $resultAlmacenamiento->fetch_assoc()) {
-        $optionsAlmacenamiento .= '<option value="' . $row['Id_Almacenamiento'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    $optionsAlmacenamiento1 = '<option value="" selected>Seleccionar un almacenamiento</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAlmacenamiento1->fetch_assoc()) {
+        $optionsAlmacenamiento1 .= '<option value="' . $row['Id_Almacenamiento'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
     }
 } else {
     // Maneja el caso de error en la consulta para almacenamiento
-    $optionsAlmacenamiento = '<option value="">Error al obtener los productos de almacenamiento</option>';
+    $optionsAlmacenamiento1 = '<option value="">Error al obtener los productos de almacenamiento</option>';
+}
+
+// Realiza una consulta para obtener los productos de la tabla almacenamiento
+$queryAlmacenamiento2 = "SELECT Id_Almacenamiento, Producto, Precio FROM almacenamiento";
+$resultAlmacenamiento2 = $conexion->query($queryAlmacenamiento2);
+
+// Verifica si la consulta fue exitosa para almacenamiento
+if ($resultAlmacenamiento2) {
+    // Crea el elemento de selección con los productos obtenidos de la base de datos para almacenamiento
+    $optionsAlmacenamiento2 = '<option value="" selected>Seleccionar un almacenamiento</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAlmacenamiento2->fetch_assoc()) {
+        $optionsAlmacenamiento2 .= '<option value="' . $row['Id_Almacenamiento'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    }
+} else {
+    // Maneja el caso de error en la consulta para almacenamiento
+    $optionsAlmacenamiento2 = '<option value="">Error al obtener los productos de almacenamiento</option>';
 }
 
 // Realiza una consulta para obtener los productos de la tabla tarjeta_de_video
@@ -146,20 +162,68 @@ if ($resultAudifono) {
     $optionsAudifono = '<option value="">Error al obtener los productos de audífonos</option>';
 }
 
-// Realiza una consulta para obtener los productos de la tabla accesorio
-$queryAccesorio = "SELECT Id_Accesorio, Producto, Precio FROM accesorio";
-$resultAccesorio = $conexion->query($queryAccesorio);
+// Realiza una consulta para obtener los productos de la tabla accesorio 1
+$queryAccesorio1 = "SELECT Id_Accesorio, Producto, Precio FROM accesorio";
+$resultAccesorio1 = $conexion->query($queryAccesorio1);
 
 // Verifica si la consulta fue exitosa para accesorios
-if ($resultAccesorio) {
+if ($resultAccesorio1) {
     // Crea el elemento de selección con los productos obtenidos de la base de datos para accesorios
-    $optionsAccesorio = '<option value="" selected>Seleccionar un accesorio</option>'; // Agregado: opción predeterminada seleccionable
-    while ($row = $resultAccesorio->fetch_assoc()) {
-        $optionsAccesorio .= '<option value="' . $row['Id_Accesorio'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    $optionsAccesorio1 = '<option value="" selected>Seleccionar un accesorio</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAccesorio1->fetch_assoc()) {
+        $optionsAccesorio1 .= '<option value="' . $row['Id_Accesorio'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
     }
 } else {
     // Maneja el caso de error en la consulta para accesorios
-    $optionsAccesorio = '<option value="">Error al obtener los productos de accesorios</option>';
+    $optionsAccesorio1 = '<option value="">Error al obtener los productos de accesorios</option>';
+}
+
+// Realiza una consulta para obtener los productos de la tabla accesorio 2
+$queryAccesorio2 = "SELECT Id_Accesorio, Producto, Precio FROM accesorio";
+$resultAccesorio2 = $conexion->query($queryAccesorio2);
+
+// Verifica si la consulta fue exitosa para accesorios
+if ($resultAccesorio2) {
+    // Crea el elemento de selección con los productos obtenidos de la base de datos para accesorios
+    $optionsAccesorio2 = '<option value="" selected>Seleccionar un accesorio</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAccesorio2->fetch_assoc()) {
+        $optionsAccesorio2 .= '<option value="' . $row['Id_Accesorio'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    }
+} else {
+    // Maneja el caso de error en la consulta para accesorios
+    $optionsAccesorio2 = '<option value="">Error al obtener los productos de accesorios</option>';
+}
+
+// Realiza una consulta para obtener los productos de la tabla accesorio 3
+$queryAccesorio3 = "SELECT Id_Accesorio, Producto, Precio FROM accesorio";
+$resultAccesorio3 = $conexion->query($queryAccesorio3);
+
+// Verifica si la consulta fue exitosa para accesorios
+if ($resultAccesorio3) {
+    // Crea el elemento de selección con los productos obtenidos de la base de datos para accesorios
+    $optionsAccesorio3 = '<option value="" selected>Seleccionar un accesorio</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAccesorio3->fetch_assoc()) {
+        $optionsAccesorio3 .= '<option value="' . $row['Id_Accesorio'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    }
+} else {
+    // Maneja el caso de error en la consulta para accesorios
+    $optionsAccesorio3 = '<option value="">Error al obtener los productos de accesorios</option>';
+}
+
+// Realiza una consulta para obtener los productos de la tabla accesorio 4
+$queryAccesorio4 = "SELECT Id_Accesorio, Producto, Precio FROM accesorio";
+$resultAccesorio4 = $conexion->query($queryAccesorio4);
+
+// Verifica si la consulta fue exitosa para accesorios
+if ($resultAccesorio4) {
+    // Crea el elemento de selección con los productos obtenidos de la base de datos para accesorios
+    $optionsAccesorio4 = '<option value="" selected>Seleccionar un accesorio</option>'; // Agregado: opción predeterminada seleccionable
+    while ($row = $resultAccesorio4->fetch_assoc()) {
+        $optionsAccesorio4 .= '<option value="' . $row['Id_Accesorio'] . '" data-precio="' . $row['Precio'] . '">' . $row['Producto'] . '</option>';
+    }
+} else {
+    // Maneja el caso de error en la consulta para accesorios
+    $optionsAccesorio4 = '<option value="">Error al obtener los productos de accesorios</option>';
 }
 
 // Realiza una consulta para obtener los productos de la tabla refrigeracion
@@ -208,13 +272,22 @@ $conexion->close();
             <span id="precioProcesador"></span>
         </form>
 
-        <!-- Formulario para el select de almacenamiento -->
+        <!-- Formulario para el select de almacenamiento 1 -->
         <form>
-            <label for="selectAlmacenamiento">Almacenamiento:</label>
-            <select id="selectAlmacenamiento">
-                <?php echo $optionsAlmacenamiento; ?>
+            <label for="selectAlmacenamiento1">Almacenamiento:</label>
+            <select id="selectAlmacenamiento1">
+                <?php echo $optionsAlmacenamiento1; ?>
             </select>
-            <span id="precioAlmacenamiento"></span>
+            <span id="precioAlmacenamiento1"></span>
+        </form>
+
+        <!-- Formulario para el select de almacenamiento 2 -->
+        <form>
+            <label for="selectAlmacenamiento2">Almacenamiento:</label>
+            <select id="selectAlmacenamiento2">
+                <?php echo $optionsAlmacenamiento2; ?>
+            </select>
+            <span id="precioAlmacenamiento2"></span>
         </form>
 
         <!-- Agregado: Formulario para el select de tarjeta_de_video -->
@@ -280,13 +353,40 @@ $conexion->close();
             <span id="precioAudifono"></span>
         </form>
 
-        <!-- Agregado: Formulario para el select de accesorios -->
+        <!-- Agregado: Formulario para el select de accesorios 1 -->
         <form>
-            <label for="selectAccesorio">Accesorio:</label>
-            <select id="selectAccesorio">
-                <?php echo $optionsAccesorio; ?>
+            <label for="selectAccesorio1">Accesorio:</label>
+            <select id="selectAccesorio1">
+                <?php echo $optionsAccesorio1; ?>
             </select>
-            <span id="precioAccesorio"></span>
+            <span id="precioAccesorio1"></span>
+        </form>
+
+        <!-- Agregado: Formulario para el select de accesorios 2 -->
+        <form>
+            <label for="selectAccesorio2">Accesorio:</label>
+            <select id="selectAccesorio2">
+                <?php echo $optionsAccesorio2; ?>
+            </select>
+            <span id="precioAccesorio2"></span>
+        </form>
+
+        <!-- Agregado: Formulario para el select de accesorios 3 -->
+        <form>
+            <label for="selectAccesorio3">Accesorio:</label>
+            <select id="selectAccesorio3">
+                <?php echo $optionsAccesorio3; ?>
+            </select>
+            <span id="precioAccesorio3"></span>
+        </form>
+
+        <!-- Agregado: Formulario para el select de accesorios 4 -->
+        <form>
+            <label for="selectAccesorio4">Accesorio:</label>
+            <select id="selectAccesorio4">
+                <?php echo $optionsAccesorio4; ?>
+            </select>
+            <span id="precioAccesorio4"></span>
         </form>
 
         <!-- Agregado: Formulario para el select de refrigeración -->

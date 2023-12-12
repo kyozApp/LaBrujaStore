@@ -46,8 +46,16 @@ if ($resultProcesadores && $resultPlacas) {
         </select>
         <span id="precioPlaca">Precio: S/. 0.00</span>
 
+        <!-- Tercer select para memorias RAM -->
+        <label for="memoriaRam">Memoria RAM:</label>
+        <select name="memoriaRam" id="memoriaRam">
+            <option value="" disabled selected>Seleccionar</option>
+            <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+        </select>
+        <span id="precioMemoriaRam">Precio: S/. 0.00</span>
+
         <script>
-            // Lógica de JavaScript para actualizar las opciones del segundo select y los precios
+            // Lógica de JavaScript para actualizar las opciones del segundo y tercer select y los precios
             document.getElementById('procesador').addEventListener('change', function() {
                 // Obtener el valor y el precio seleccionado del primer select
                 var idProcesador = this.value;
@@ -56,8 +64,9 @@ if ($resultProcesadores && $resultPlacas) {
                 // Actualizar el precio del procesador en el span
                 document.getElementById('precioProcesador').textContent = "Precio: S/. " + (isNaN(precioProcesador) ? '0.00' : precioProcesador.toFixed(2));
 
-                // Restablecer el precio de la placa a "Precio no disponible"
+                // Restablecer el precio de la placa y memoria RAM a "Precio no disponible"
                 document.getElementById('precioPlaca').textContent = "Precio: S/. ";
+                document.getElementById('precioMemoriaRam').textContent = "Precio: S/. ";
 
                 // Realizar una solicitud AJAX para obtener las placas compatibles
                 var xhttp = new XMLHttpRequest();
@@ -101,6 +110,59 @@ if ($resultProcesadores && $resultPlacas) {
                 } else {
                     // Manejar el caso en que el precio no sea un número válido
                     document.getElementById('precioPlaca').textContent = "Precio: S/. 0.00";
+                }
+
+                // Restablecer el precio de la memoria RAM a "Precio no disponible"
+                document.getElementById('precioMemoriaRam').textContent = "Precio: S/. ";
+            });
+
+            // Lógica para cargar las opciones de memoria RAM compatibles con la placa seleccionada
+            document.getElementById('placa').addEventListener('change', function() {
+                // Obtener el valor de la placa seleccionada
+                var idPlaca = this.value;
+
+                // Realizar una solicitud AJAX para obtener las memorias RAM compatibles
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Limpiar las opciones actuales del tercer select
+                        document.getElementById('memoriaRam').innerHTML = '';
+
+                        // Parsear la respuesta JSON
+                        var memoriasRam = JSON.parse(this.responseText);
+
+                        // Agregar la opción "Seleccionar" al tercer select
+                        var optionSeleccionar = document.createElement('option');
+                        optionSeleccionar.value = "";
+                        optionSeleccionar.text = "Seleccionar";
+                        document.getElementById('memoriaRam').add(optionSeleccionar);
+
+                        // Agregar las nuevas opciones al tercer select
+                        for (var i = 0; i < memoriasRam.length; i++) {
+                            var option = document.createElement('option');
+                            option.value = memoriasRam[i].Id_MemoriaRam;
+                            option.text = memoriasRam[i].Producto;
+                            option.setAttribute('data-precio', memoriasRam[i].Precio);
+                            document.getElementById('memoriaRam').add(option);
+                        }
+                    }
+                };
+                xhttp.open("GET", "get_memorias_ram.php?Id_Placa=" + idPlaca, true);
+                xhttp.send();
+            });
+
+            // Lógica para actualizar el precio de la memoria RAM seleccionada
+            document.getElementById('memoriaRam').addEventListener('change', function() {
+                // Obtener el precio seleccionado del tercer select
+                var precioMemoriaRam = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
+
+                // Verificar si el precio es un número válido
+                if (!isNaN(precioMemoriaRam)) {
+                    // Actualizar el precio de la memoria RAM en el span
+                    document.getElementById('precioMemoriaRam').textContent = "Precio: S/. " + precioMemoriaRam.toFixed(2);
+                } else {
+                    // Manejar el caso en que el precio no sea un número válido
+                    document.getElementById('precioMemoriaRam').textContent = "Precio: S/. 0.00";
                 }
             });
         </script>

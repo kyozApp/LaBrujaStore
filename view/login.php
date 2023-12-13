@@ -5,34 +5,79 @@ include('../conexiondb/conexion.php'); // Incluye tu archivo de conexión
 // Iniciamos las sesiones al principio del archivo
 session_start();
 
+function limpiar_cadena($cadena){
+    $cadena=trim($cadena);
+    $cadena=stripslashes($cadena);
+    $cadena=str_ireplace("<script>", "", $cadena);
+    $cadena=str_ireplace("</script>", "", $cadena);
+    $cadena=str_ireplace("<script src", "", $cadena);
+    $cadena=str_ireplace("<script type=", "", $cadena);
+    $cadena=str_ireplace("SELECT * FROM", "", $cadena);
+    $cadena=str_ireplace("DELETE FROM", "", $cadena);
+    $cadena=str_ireplace("INSERT INTO", "", $cadena);
+    $cadena=str_ireplace("DROP TABLE", "", $cadena);
+    $cadena=str_ireplace("DROP DATABASE", "", $cadena);
+    $cadena=str_ireplace("TRUNCATE TABLE", "", $cadena);
+    $cadena=str_ireplace("SHOW TABLES;", "", $cadena);
+    $cadena=str_ireplace("SHOW DATABASES;", "", $cadena);
+    $cadena=str_ireplace("<?php", "", $cadena);
+    $cadena=str_ireplace("?>", "", $cadena);
+    $cadena=str_ireplace("--", "", $cadena);
+    $cadena=str_ireplace("^", "", $cadena);
+    $cadena=str_ireplace("<", "", $cadena);
+    $cadena=str_ireplace("[", "", $cadena);
+    $cadena=str_ireplace("]", "", $cadena);
+    $cadena=str_ireplace("==", "", $cadena);
+    $cadena=str_ireplace(";", "", $cadena);
+    $cadena=str_ireplace("::", "", $cadena);
+    $cadena=trim($cadena);
+    $cadena=stripslashes($cadena);
+    return $cadena;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
+    $usuario = limpiar_cadena($_POST['usuario']);
+    $contrasena = limpiar_cadena($_POST['contrasena']);
 
-    // Verificar las credenciales en la base de datos
-    $consulta = "SELECT * FROM Usuario WHERE Usuario = '$usuario' AND Contraseña = '$contrasena'";
-    $resultado = $conexion->query($consulta);
+    // Consulta preparada para evitar la inyección SQL
+    $consulta = "SELECT * FROM Usuario WHERE Usuario = ? AND Contraseña = ?";
+    
+    // Preparar la consulta
+    $stmt = $conexion->prepare($consulta);
+    if ($stmt) {
+        // Vincular los parámetros
+        $stmt->bind_param("ss", $usuario, $contrasena);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
+        // Obtener el resultado
+        $resultado = $stmt->get_result();
 
-    if ($resultado->num_rows > 0) {
-        // El usuario ha iniciado sesión correctamente
-        $row = $resultado->fetch_assoc();
-        $_SESSION['id_usuario'] = $row['Id_Usuario'];
-        $_SESSION['usuario'] = $row['Usuario'];
-        $_SESSION['rol'] = $row['Rol'];
+        if ($resultado->num_rows > 0) {
+            // El usuario ha iniciado sesión correctamente
+            $row = $resultado->fetch_assoc();
+            $_SESSION['id_usuario'] = $row['Id_Usuario'];
+            $_SESSION['usuario'] = $row['Usuario'];
+            $_SESSION['rol'] = $row['Rol'];
 
-        // Redireccionar según el rol del usuario
-        if ($_SESSION['rol'] == 'admin') {
-            header("Location: admin.php");
-            die();
-        } elseif ($_SESSION['rol'] == 'cliente') {
-            header("Location: cliente.php");
-            die();
+            // Redireccionar según el rol del usuario
+            if ($_SESSION['rol'] == 'admin') {
+                header("Location: admin.php");
+                die();
+            } elseif ($_SESSION['rol'] == 'cliente') {
+                header("Location: cliente.php");
+                die();
+            } else {
+                // Manejar otros roles según sea necesario
+                echo "Rol no reconocido";
+            }
         } else {
-            // Manejar otros roles según sea necesario
-            echo "Rol no reconocido";
+            echo '<div class="div-mensaje"><p class="mensaje">Credenciales incorrectas</p></div>';
         }
     } else {
-        echo "Credenciales incorrectas";
+        // Manejar el error de la consulta preparada si es necesario
+        echo '<div class="div-mensaje"><p class="mensaje">Credenciales incorrectas</p></div>';
     }
 }
 ?>

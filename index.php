@@ -26,6 +26,8 @@ if ($resultProcesadores && $resultPlacas) {
 
     <body>
         <main>
+            
+        <form action="">
             <!-- Primer select para procesadores -->
             <label for="procesador">Procesador:</label>
             <select name="procesador" id="procesador">
@@ -174,6 +176,10 @@ if ($resultProcesadores && $resultPlacas) {
                 <!-- Las opciones se llenarán dinámicamente con JavaScript -->
             </select>
             <span id="precioRefrigeracion">Precio: S/. 0.00</span>
+
+            <span id="precioTotal">Precio Total: S/. 0.00</span>
+        </form>
+
 
             <script>
                 // Lógica de JavaScript para actualizar las opciones del segundo y tercer select y los precios
@@ -803,7 +809,65 @@ if ($resultProcesadores && $resultPlacas) {
                 actualizarPrecioAccesorio('accesorio3', 'precioAccesorio3');
                 actualizarPrecioAccesorio('accesorio4', 'precioAccesorio4');
 
-                
+                // Función para calcular y actualizar el precio total
+                function actualizarPrecioTotal() {
+                    // Obtener los precios de cada componente
+                    var precioProcesador = parseFloat(document.getElementById('precioProcesador').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioPlaca = parseFloat(document.getElementById('precioPlaca').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioMemoriaRam1 = parseFloat(document.getElementById('precioMemoriaRam1').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioMemoriaRam2 = parseFloat(document.getElementById('precioMemoriaRam2').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAlmacenamiento1 = parseFloat(document.getElementById('precioAlmacenamiento1').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAlmacenamiento2 = parseFloat(document.getElementById('precioAlmacenamiento2').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioTarjetaDeVideo = parseFloat(document.getElementById('precioTarjetaDeVideo').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioFuenteDePoder = parseFloat(document.getElementById('precioFuenteDePoder').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioCases = parseFloat(document.getElementById('precioCases').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioMonitores = parseFloat(document.getElementById('precioMonitores').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioTeclados = parseFloat(document.getElementById('precioTeclados').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioMouses = parseFloat(document.getElementById('precioMouses').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAudifonos = parseFloat(document.getElementById('precioAudifonos').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAccesorio1 = parseFloat(document.getElementById('precioAccesorio1').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAccesorio2 = parseFloat(document.getElementById('precioAccesorio2').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAccesorio3 = parseFloat(document.getElementById('precioAccesorio3').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioAccesorio4 = parseFloat(document.getElementById('precioAccesorio4').textContent.replace('Precio: S/. ', '') || 0);
+                    var precioRefrigeracion = parseFloat(document.getElementById('precioRefrigeracion').textContent.replace('Precio: S/. ', '') || 0);
+
+                    // Calcular el precio total
+                    var precioTotal = precioProcesador + precioPlaca + precioMemoriaRam1 + precioMemoriaRam2 +
+                        precioAlmacenamiento1 + precioAlmacenamiento2 + precioTarjetaDeVideo + precioFuenteDePoder +
+                        precioCases + precioMonitores + precioTeclados + precioMouses + precioAudifonos +
+                        precioAccesorio1 + precioAccesorio2 + precioAccesorio3 + precioAccesorio4 + precioRefrigeracion;
+
+                    // Actualizar el precio total en el span correspondiente
+                    document.getElementById('precioTotal').textContent = "Precio Total: S/. " + precioTotal.toFixed(2);
+                }
+
+                // ... (código existente) ...
+
+                // Llamada a la función para actualizar el precio total al cargar la página
+                actualizarPrecioTotal();
+
+                // Llamada a la función para actualizar el precio total cada vez que cambia un componente
+                document.getElementById('procesador').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('placa').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('memoriaRam1').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('memoriaRam2').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('almacenamiento1').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('almacenamiento2').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('tarjetaDeVideo').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('fuenteDePoder').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('cases').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('monitores').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('teclados').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('mouses').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('audifonos').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('accesorio1').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('accesorio2').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('accesorio3').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('accesorio4').addEventListener('change', actualizarPrecioTotal);
+                document.getElementById('refrigeracion').addEventListener('change', actualizarPrecioTotal);
+            </script>
+
+
             </script>
         </main>
     </body>

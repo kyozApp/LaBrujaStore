@@ -22,12 +22,14 @@ if ($resultProcesadores && $resultPlacas) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="estilo.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     </head>
 
     <body>
         <main>
 
-            <form action="">
+            <form>
                 <!-- Primer select para procesadores -->
                 <label for="procesador">Procesador:</label>
                 <select name="procesador" id="procesador">
@@ -869,21 +871,93 @@ if ($resultProcesadores && $resultPlacas) {
                 document.getElementById('accesorio4').addEventListener('change', actualizarPrecioTotal);
                 document.getElementById('refrigeracion').addEventListener('change', actualizarPrecioTotal);
 
+
+                // Lista de números de teléfono de WhatsApp
+                const numerosWhatsApp = ['51985872694', '51979578623', '51927993661'];
+
+                // Índice para llevar un seguimiento del número de teléfono actual
+                let indiceNumeroWhatsApp = 0;
+
+                // Resto del código...
+
+
+                // Función para generar la cotización y enviar a WhatsApp
                 function generarCotizacion() {
-                    // Lógica para calcular y mostrar el precio total
-                    var precios = document.querySelectorAll('[id^="precio"]');
-                    var total = 0;
+                    // Obtener los valores seleccionados en los select
+                    const procesador = obtenerSeleccionado('procesador');
+                    const placa = obtenerSeleccionado('placa');
+                    const memoriaRam1 = obtenerSeleccionado('memoriaRam1');
+                    const memoriaRam2 = obtenerSeleccionado('memoriaRam2');
+                    const almacenamiento1 = obtenerSeleccionado('almacenamiento1');
+                    const almacenamiento2 = obtenerSeleccionado('almacenamiento2');
+                    const tarjetaDeVideo = obtenerSeleccionado('tarjetaDeVideo');
+                    const fuenteDePoder = obtenerSeleccionado('fuenteDePoder');
+                    const cases = obtenerSeleccionado('cases');
+                    const monitores = obtenerSeleccionado('monitores');
+                    const teclados = obtenerSeleccionado('teclados');
+                    const mouses = obtenerSeleccionado('mouses');
+                    const audifonos = obtenerSeleccionado('audifonos');
+                    const accesorio1 = obtenerSeleccionado('accesorio1');
+                    const accesorio2 = obtenerSeleccionado('accesorio2');
+                    const accesorio3 = obtenerSeleccionado('accesorio3');
+                    const accesorio4 = obtenerSeleccionado('accesorio4');
+                    const refrigeracion = obtenerSeleccionado('refrigeracion');
+                    const precioTotal = document.getElementById('precioTotal').innerText;
 
-                    precios.forEach(function(precioElement) {
-                        var precio = parseFloat(precioElement.textContent.replace('Precio: S/. ', ''));
-                        if (!isNaN(precio)) {
-                            total += precio;
-                        }
-                    });
+                    // Obtener los elementos span que contienen los precios de cada producto
+                    const precios = document.querySelectorAll('[id^="precio"]');
 
-                    document.getElementById('precioTotal').textContent = 'Precio Total: S/. ' + total.toFixed(2);
+                    // Construir el mensaje de cotización con nombres y precios
+                    let mensajeCotizacion = `
+                        Procesador: ${procesador}            Precio: ${precios[0].textContent.replace('Precio: ', '').trim()}
+                        Placa: ${placa}                      Precio: ${precios[1].textContent.replace('Precio: ', '').trim()}
+                        Memoria Ram 1: ${memoriaRam1}        Precio: ${precios[2].textContent.replace('Precio: ', '').trim()}
+                        Memoria Ram 2: ${memoriaRam2}        Precio: ${precios[3].textContent.replace('Precio: ', '').trim()}
+                        Almacenamiento 1: ${almacenamiento1} Precio: ${precios[4].textContent.replace('Precio: ', '').trim()}
+                        Almacenamiento 2: ${almacenamiento2} Precio: ${precios[5].textContent.replace('Precio: ', '').trim()}
+                        Tarjeta de Video: ${tarjetaDeVideo}  Precio: ${precios[6].textContent.replace('Precio: ', '').trim()}
+                        Fuente de Poder: ${fuenteDePoder}    Precio: ${precios[7].textContent.replace('Precio: ', '').trim()}
+                        Case: ${cases}                       Precio: ${precios[8].textContent.replace('Precio: ', '').trim()}
+                        Monitor: ${monitores}                Precio: ${precios[9].textContent.replace('Precio: ', '').trim()}
+                        Teclado: ${teclados}                 Precio: ${precios[10].textContent.replace('Precio: ', '').trim()}
+                        Mouse: ${mouses}                     Precio: ${precios[11].textContent.replace('Precio: ', '').trim()}
+                        Audífonos: ${audifonos}              Precio: ${precios[12].textContent.replace('Precio: ', '').trim()}
+                        Accesorio 1: ${accesorio1}           Precio: ${precios[13].textContent.replace('Precio: ', '').trim()}
+                        Accesorio 2: ${accesorio2}           Precio: ${precios[14].textContent.replace('Precio: ', '').trim()}
+                        Accesorio 3: ${accesorio3}           Precio: ${precios[15].textContent.replace('Precio: ', '').trim()}
+                        Accesorio 4: ${accesorio4}           Precio: ${precios[16].textContent.replace('Precio: ', '').trim()}
+                        Refrigeración: ${refrigeracion}      Precio: ${precios[17].textContent.replace('Precio: ', '').trim()}
+                        Precio Total: ${precioTotal}
+                        `;
+
+                    // Filtrar productos con precio distinto de "S/. 0.00"
+                    mensajeCotizacion = mensajeCotizacion
+                        .split('\n')
+                        .filter(linea => !linea.includes('Precio: S/. 0.00'))
+                        .join('\n');
+
+                    // Número de teléfono de WhatsApp al que enviar el mensaje
+                    const numeroWhatsAppActual = numerosWhatsApp[indiceNumeroWhatsApp];
+
+                    // Crear el enlace de WhatsApp
+                    const enlaceWhatsApp = `https://wa.me/${numeroWhatsAppActual}?text=${encodeURIComponent(mensajeCotizacion)}`;
+
+                    // Redireccionar a la página de WhatsApp
+                    window.location.href = enlaceWhatsApp;
+
+                    // Incrementar el índice para el próximo número de teléfono
+                    indiceNumeroWhatsApp = (indiceNumeroWhatsApp + 1) % numerosWhatsApp.length;
+                }
+
+
+                // Función para obtener la opción seleccionada en un select
+                function obtenerSeleccionado(idSelect) {
+                    const select = document.getElementById(idSelect);
+                    const indiceSeleccionado = select.selectedIndex;
+                    return indiceSeleccionado !== -1 ? select.options[indiceSeleccionado].text : '';
                 }
             </script>
+
         </main>
     </body>
 

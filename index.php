@@ -26,159 +26,162 @@ if ($resultProcesadores && $resultPlacas) {
 
     <body>
         <main>
-            
-        <form action="">
-            <!-- Primer select para procesadores -->
-            <label for="procesador">Procesador:</label>
-            <select name="procesador" id="procesador">
-                <option value="" selected>Seleccionar</option>
-                <?php
-                while ($rowProcesador = $resultProcesadores->fetch_assoc()) {
-                    echo "<option value='{$rowProcesador['Id_Procesador']}' data-precio='{$rowProcesador['Precio']}'>{$rowProcesador['Producto']}</option>";
-                }
-                ?>
-            </select>
-            <span id="precioProcesador">Precio: S/. 0.00</span>
 
-            <!-- Segundo select para placas -->
-            <label for="placa">Placa:</label>
-            <select name="placa" id="placa">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioPlaca">Precio: S/. 0.00</span>
+            <form action="">
+                <!-- Primer select para procesadores -->
+                <label for="procesador">Procesador:</label>
+                <select name="procesador" id="procesador">
+                    <option value="" selected>Seleccionar</option>
+                    <?php
+                    while ($rowProcesador = $resultProcesadores->fetch_assoc()) {
+                        echo "<option value='{$rowProcesador['Id_Procesador']}' data-precio='{$rowProcesador['Precio']}'>{$rowProcesador['Producto']}</option>";
+                    }
+                    ?>
+                </select>
+                <span id="precioProcesador">Precio: S/. 0.00</span>
 
-            <!-- Primer select para memorias RAM -->
-            <label for="memoriaRam1">Memoria RAM 1:</label>
-            <select name="memoriaRam1" id="memoriaRam1">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioMemoriaRam1">Precio: S/. 0.00</span>
+                <!-- Segundo select para placas -->
+                <label for="placa">Placa:</label>
+                <select name="placa" id="placa">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioPlaca">Precio: S/. 0.00</span>
 
-            <!-- Segundo select para memorias RAM -->
-            <label for="memoriaRam2">Memoria RAM 2:</label>
-            <select name="memoriaRam2" id="memoriaRam2">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioMemoriaRam2">Precio: S/. 0.00</span>
+                <!-- Primer select para memorias RAM -->
+                <label for="memoriaRam1">Memoria RAM 1:</label>
+                <select name="memoriaRam1" id="memoriaRam1">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioMemoriaRam1">Precio: S/. 0.00</span>
 
-            <!-- Cuarto select para almacenamiento 1 -->
-            <label for="almacenamiento1">Almacenamiento 1:</label>
-            <select name="almacenamiento1" id="almacenamiento1">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAlmacenamiento1">Precio: S/. 0.00</span>
+                <!-- Segundo select para memorias RAM -->
+                <label for="memoriaRam2">Memoria RAM 2:</label>
+                <select name="memoriaRam2" id="memoriaRam2">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioMemoriaRam2">Precio: S/. 0.00</span>
 
-            <!-- Quinto select para almacenamiento 2 -->
-            <label for="almacenamiento2">Almacenamiento 2:</label>
-            <select name="almacenamiento2" id="almacenamiento2">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAlmacenamiento2">Precio: S/. 0.00</span>
+                <!-- Cuarto select para almacenamiento 1 -->
+                <label for="almacenamiento1">Almacenamiento 1:</label>
+                <select name="almacenamiento1" id="almacenamiento1">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAlmacenamiento1">Precio: S/. 0.00</span>
 
-            <!-- Sexto select para tarjeta de video -->
-            <label for="tarjetaDeVideo">Tarjeta de Video:</label>
-            <select name="tarjetaDeVideo" id="tarjetaDeVideo">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioTarjetaDeVideo">Precio: S/. 0.00</span>
+                <!-- Quinto select para almacenamiento 2 -->
+                <label for="almacenamiento2">Almacenamiento 2:</label>
+                <select name="almacenamiento2" id="almacenamiento2">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAlmacenamiento2">Precio: S/. 0.00</span>
 
-            <!-- Séptimo select para fuente de poder -->
-            <label for="fuenteDePoder">Fuente de Poder:</label>
-            <select name="fuenteDePoder" id="fuenteDePoder">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioFuenteDePoder">Precio: S/. 0.00</span>
+                <!-- Sexto select para tarjeta de video -->
+                <label for="tarjetaDeVideo">Tarjeta de Video:</label>
+                <select name="tarjetaDeVideo" id="tarjetaDeVideo">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioTarjetaDeVideo">Precio: S/. 0.00</span>
 
-            <!-- Octavo select para cases -->
-            <label for="cases">Cases:</label>
-            <select name="cases" id="cases">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioCases">Precio: S/. 0.00</span>
+                <!-- Séptimo select para fuente de poder -->
+                <label for="fuenteDePoder">Fuente de Poder:</label>
+                <select name="fuenteDePoder" id="fuenteDePoder">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioFuenteDePoder">Precio: S/. 0.00</span>
 
-            <!-- Noveno select para monitores -->
-            <label for="monitores">Monitores:</label>
-            <select name="monitores" id="monitores">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioMonitores">Precio: S/. 0.00</span>
+                <!-- Octavo select para cases -->
+                <label for="cases">Cases:</label>
+                <select name="cases" id="cases">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioCases">Precio: S/. 0.00</span>
 
-            <!-- Décimo select para teclados -->
-            <label for="teclados">Teclados:</label>
-            <select name="teclados" id="teclados">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioTeclados">Precio: S/. 0.00</span>
+                <!-- Noveno select para monitores -->
+                <label for="monitores">Monitores:</label>
+                <select name="monitores" id="monitores">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioMonitores">Precio: S/. 0.00</span>
 
-            <!-- Undécimo select para mouses -->
-            <label for="mouses">Mouses:</label>
-            <select name="mouses" id="mouses">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioMouses">Precio: S/. 0.00</span>
+                <!-- Décimo select para teclados -->
+                <label for="teclados">Teclados:</label>
+                <select name="teclados" id="teclados">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioTeclados">Precio: S/. 0.00</span>
 
-            <!-- Duodécimo select para audífonos -->
-            <label for="audifonos">Audífonos:</label>
-            <select name="audifonos" id="audifonos">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAudifonos">Precio: S/. 0.00</span>
+                <!-- Undécimo select para mouses -->
+                <label for="mouses">Mouses:</label>
+                <select name="mouses" id="mouses">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioMouses">Precio: S/. 0.00</span>
 
-            <!-- Cuarto select para accesorios -->
-            <label for="accesorio1">Accesorio 1:</label>
-            <select name="accesorio1" id="accesorio1">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAccesorio1">Precio: S/. 0.00</span>
+                <!-- Duodécimo select para audífonos -->
+                <label for="audifonos">Audífonos:</label>
+                <select name="audifonos" id="audifonos">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAudifonos">Precio: S/. 0.00</span>
 
-            <!-- Quinto select para accesorios -->
-            <label for="accesorio2">Accesorio 2:</label>
-            <select name="accesorio2" id="accesorio2">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAccesorio2">Precio: S/. 0.00</span>
+                <!-- Cuarto select para accesorios -->
+                <label for="accesorio1">Accesorio 1:</label>
+                <select name="accesorio1" id="accesorio1">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAccesorio1">Precio: S/. 0.00</span>
 
-            <!-- Sexto select para accesorios -->
-            <label for="accesorio3">Accesorio 3:</label>
-            <select name="accesorio3" id="accesorio3">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAccesorio3">Precio: S/. 0.00</span>
+                <!-- Quinto select para accesorios -->
+                <label for="accesorio2">Accesorio 2:</label>
+                <select name="accesorio2" id="accesorio2">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAccesorio2">Precio: S/. 0.00</span>
 
-            <!-- Séptimo select para accesorios -->
-            <label for="accesorio4">Accesorio 4:</label>
-            <select name="accesorio4" id="accesorio4">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioAccesorio4">Precio: S/. 0.00</span>
+                <!-- Sexto select para accesorios -->
+                <label for="accesorio3">Accesorio 3:</label>
+                <select name="accesorio3" id="accesorio3">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAccesorio3">Precio: S/. 0.00</span>
+
+                <!-- Séptimo select para accesorios -->
+                <label for="accesorio4">Accesorio 4:</label>
+                <select name="accesorio4" id="accesorio4">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioAccesorio4">Precio: S/. 0.00</span>
 
 
-            <!-- Décimo tercer select para refrigeración -->
-            <label for="refrigeracion">Refrigeración:</label>
-            <select name="refrigeracion" id="refrigeracion">
-                <option value="" disabled selected>Seleccionar</option>
-                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
-            </select>
-            <span id="precioRefrigeracion">Precio: S/. 0.00</span>
+                <!-- Décimo tercer select para refrigeración -->
+                <label for="refrigeracion">Refrigeración:</label>
+                <select name="refrigeracion" id="refrigeracion">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                <span id="precioRefrigeracion">Precio: S/. 0.00</span>
 
-            <span id="precioTotal">Precio Total: S/. 0.00</span>
-        </form>
+                <span id="precioTotal">Precio Total: S/. 0.00</span>
+
+                <button type="button" onclick="generarCotizacion()">Generar Cotización</button>
+
+            </form>
 
 
             <script>
@@ -865,9 +868,21 @@ if ($resultProcesadores && $resultPlacas) {
                 document.getElementById('accesorio3').addEventListener('change', actualizarPrecioTotal);
                 document.getElementById('accesorio4').addEventListener('change', actualizarPrecioTotal);
                 document.getElementById('refrigeracion').addEventListener('change', actualizarPrecioTotal);
-            </script>
 
+                function generarCotizacion() {
+                    // Lógica para calcular y mostrar el precio total
+                    var precios = document.querySelectorAll('[id^="precio"]');
+                    var total = 0;
 
+                    precios.forEach(function(precioElement) {
+                        var precio = parseFloat(precioElement.textContent.replace('Precio: S/. ', ''));
+                        if (!isNaN(precio)) {
+                            total += precio;
+                        }
+                    });
+
+                    document.getElementById('precioTotal').textContent = 'Precio Total: S/. ' + total.toFixed(2);
+                }
             </script>
         </main>
     </body>

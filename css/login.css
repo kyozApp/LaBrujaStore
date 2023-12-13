@@ -8,6 +8,8 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f9f9f9;
+    flex-direction: column-reverse;
+    margin-bottom: 12px;
 }
 
 .login-form {
@@ -95,6 +97,18 @@ input[type="password"] {
 .submit-button:hover,
 .exit-button:hover {
     background-color: #2980b9;
+}
+
+.div-mensaje {
+    width: 461px;
+    text-align: center;
+}
+
+.mensaje {
+    background-color: #ff5151;
+    margin: 0px;
+    color: white;
+    padding: 7px;
 }
 
 /* Media Queries para tamaños de pantalla más pequeños */

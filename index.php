@@ -134,6 +134,39 @@ if ($resultProcesadores && $resultPlacas) {
             </select>
             <span id="precioAudifonos">Precio: S/. 0.00</span>
 
+            <!-- Cuarto select para accesorios -->
+            <label for="accesorio1">Accesorio 1:</label>
+            <select name="accesorio1" id="accesorio1">
+                <option value="" disabled selected>Seleccionar</option>
+                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+            </select>
+            <span id="precioAccesorio1">Precio: S/. 0.00</span>
+
+            <!-- Quinto select para accesorios -->
+            <label for="accesorio2">Accesorio 2:</label>
+            <select name="accesorio2" id="accesorio2">
+                <option value="" disabled selected>Seleccionar</option>
+                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+            </select>
+            <span id="precioAccesorio2">Precio: S/. 0.00</span>
+
+            <!-- Sexto select para accesorios -->
+            <label for="accesorio3">Accesorio 3:</label>
+            <select name="accesorio3" id="accesorio3">
+                <option value="" disabled selected>Seleccionar</option>
+                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+            </select>
+            <span id="precioAccesorio3">Precio: S/. 0.00</span>
+
+            <!-- Séptimo select para accesorios -->
+            <label for="accesorio4">Accesorio 4:</label>
+            <select name="accesorio4" id="accesorio4">
+                <option value="" disabled selected>Seleccionar</option>
+                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+            </select>
+            <span id="precioAccesorio4">Precio: S/. 0.00</span>
+
+
             <!-- Décimo tercer select para refrigeración -->
             <label for="refrigeracion">Refrigeración:</label>
             <select name="refrigeracion" id="refrigeracion">
@@ -710,6 +743,67 @@ if ($resultProcesadores && $resultPlacas) {
                         document.getElementById('precioRefrigeracion').textContent = "Precio: S/. 0.00";
                     }
                 });
+                // Lógica de JavaScript para cargar las opciones de accesorios desde la base de datos
+                function cargarAccesorios(selectId, precioId) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            // Limpiar las opciones actuales del select de accesorio
+                            document.getElementById(selectId).innerHTML = '';
+
+                            // Parsear la respuesta JSON
+                            var accesorios = JSON.parse(this.responseText);
+
+                            // Agregar la opción "Seleccionar" al select de accesorio
+                            var optionSeleccionar = document.createElement('option');
+                            optionSeleccionar.value = "";
+                            optionSeleccionar.text = "Seleccionar";
+                            document.getElementById(selectId).add(optionSeleccionar);
+
+                            // Agregar las nuevas opciones al select de accesorio
+                            for (var i = 0; i < accesorios.length; i++) {
+                                var option = document.createElement('option');
+                                option.value = accesorios[i].Id_Accesorio;
+                                option.text = accesorios[i].Producto;
+                                option.setAttribute('data-precio', accesorios[i].Precio);
+                                document.getElementById(selectId).add(option);
+                            }
+                        }
+                    };
+                    xhttp.open("GET", "get_accesorios.php", true);
+                    xhttp.send();
+                }
+
+                // Llamada a la función para cargar las opciones de accesorio al cargar la página
+                cargarAccesorios('accesorio1', 'precioAccesorio1');
+                cargarAccesorios('accesorio2', 'precioAccesorio2');
+                cargarAccesorios('accesorio3', 'precioAccesorio3');
+                cargarAccesorios('accesorio4', 'precioAccesorio4');
+
+                // Lógica para actualizar el precio del accesorio seleccionado
+                function actualizarPrecioAccesorio(selectId, precioId) {
+                    document.getElementById(selectId).addEventListener('change', function() {
+                        // Obtener el precio seleccionado del select de accesorio
+                        var precioAccesorio = parseFloat(this.options[this.selectedIndex].getAttribute('data-precio'));
+
+                        // Verificar si el precio es un número válido
+                        if (!isNaN(precioAccesorio)) {
+                            // Actualizar el precio del accesorio en el span
+                            document.getElementById(precioId).textContent = "Precio: S/. " + precioAccesorio.toFixed(2);
+                        } else {
+                            // Manejar el caso en que el precio no sea un número válido
+                            document.getElementById(precioId).textContent = "Precio: S/. 0.00";
+                        }
+                    });
+                }
+
+                // Llamada a la función para actualizar los precios de los accesorios
+                actualizarPrecioAccesorio('accesorio1', 'precioAccesorio1');
+                actualizarPrecioAccesorio('accesorio2', 'precioAccesorio2');
+                actualizarPrecioAccesorio('accesorio3', 'precioAccesorio3');
+                actualizarPrecioAccesorio('accesorio4', 'precioAccesorio4');
+
+                
             </script>
         </main>
     </body>

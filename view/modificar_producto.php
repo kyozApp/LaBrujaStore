@@ -138,7 +138,7 @@ if (isset($_GET['id'])) {
             <label class="contenido" for="categoria">Categoría:</label>
             <select class="cont-contenido" id="categoria" name="categoria" required>
                 <?php
-                $categorias = array("Placa", "Procesador", "Case");
+                $categorias = array("Procesador", "Placa", "Memoria ram", "Almacenamiento", "Tarjeta de video", "Fuente de poder", "Case", "Torre de refrigeracion", "Torre liquida", "Monitor", "Teclado", "Mouse", "Audifonos", "Laptop", "Combos");
                 foreach ($categorias as $categoriaOption) {
                     $selected = ($categoriaOption == $producto['Categoria']) ? 'selected' : '';
                     echo "<option value='$categoriaOption' $selected>$categoriaOption</option>";

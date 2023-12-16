@@ -23,6 +23,7 @@ if ($resultProcesadores && $resultPlacas) {
         <title>Document</title>
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/index_producto.css">
+        <link rel="stylesheet" href="css/catalogo_header.css">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     </head>
@@ -39,7 +40,6 @@ if ($resultProcesadores && $resultPlacas) {
 
         <!-- Botones -->
         <div id="header-botones">
-            <div class="botones-cont btn-acion"><a href="index.php">Cotización</a></div>
             <div class="dropdown botones-cont btn-acion">
                 <a href="view/catalogo.php">Catalogo</a>
                 <!-- Lista de categorías -->
@@ -57,26 +57,21 @@ if ($resultProcesadores && $resultPlacas) {
                 <img id="icon-tres-lineas" src="img/icon/tres-lineas.png" alt="Icono de menu 3 lineas">
 
                 <div class="opciones-lista">
-                    <a class="cont-lista" href="#">Cotización</a>
-
                     <div class="cont-sub-categorias">
-                        <a class="cont-lista" href="#">Catalogo</a>
+                        <a class="cont-lista" href="view/catalogo.php">Catalogo</a>
                         <div class="opciones-sub-categoria">
                             <a class="cont-lista" href="#">Procesador</a>
                             <a class="cont-lista" href="#">Placas Madre</a>
                             <a class="cont-lista" href="#">Memorias Ram</a>
                         </div>
                     </div>
-                    <a class="cont-lista" href="login.php">Iniciar Sesion</a>
+                    <a class="cont-lista" href="view/login.php">Iniciar Sesion</a>
                 </div>
             </div>
 
             <div class="botones-cont div-formulario">
                 <!-- Barra de búsqueda -->
-                <form class="-segundo" action="/ruta_de_busqueda" method="GET">
-                    <input class="buscar-text" type="text" name="busqueda" placeholder="Buscar...">
-                    <button class="buscar-boton" type="submit">Buscar</button>
-                </form>
+                
             </div>
         </div>
 
@@ -88,6 +83,7 @@ if ($resultProcesadores && $resultPlacas) {
     </header>
 
             <form>
+                <h1>REALZIA TU COTIZACION</h1>
                 <!-- Primer select para procesadores -->
                 <label for="procesador">Procesador:</label>
                 <select name="procesador" id="procesador">
@@ -236,10 +232,11 @@ if ($resultProcesadores && $resultPlacas) {
                     <!-- Las opciones se llenarán dinámicamente con JavaScript -->
                 </select>
                 <span id="precioRefrigeracion">Precio: S/. 0.00</span>
-
-                <span id="precioTotal">Precio Total: S/. 0.00</span>
-
-                <button type="button" onclick="generarCotizacion()">Generar Cotización</button>
+                <div class="coti-final">
+                    <span id="precioTotal">Precio Total: S/. 0.00</span>
+                    <button type="button" onclick="generarCotizacion()">Generar Cotización</button>
+                </div>
+    
 
             </form>
 

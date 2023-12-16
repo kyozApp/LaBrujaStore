@@ -3,7 +3,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$db = "labrujastore";
+$db = "id21464806_labrujastore";
 
 $conexion = new mysqli($server, $user, $pass, $db);
 

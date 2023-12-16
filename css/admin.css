@@ -1,3 +1,56 @@
+/* admin.css
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a.button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+a.button:hover {
+    background-color: #0056b3;
+} */
+
 /* admin.css */
 
 body {
@@ -49,4 +102,50 @@ tr:hover {
 
 a.button:hover {
     background-color: #0056b3;
+}
+
+/* ACA ES CSS DE DIEGO */
+.cont-he {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-titulo {
+    text-align: center;
+    margin-top: 0;
+    color: #007BFF;
+    padding-top: 30px;
+}
+
+.btn-salir {
+    background-color: red;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.titulo-tabla {
+    text-align: center;
+    text-decoration: underline;
+}
+
+/* Media Queries para tamaños de pantalla más pequeños */
+@media screen and (max-width: 1200px) {
+    .desaparecer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .desaparecer-2 {
+        display: none;
+    }
+
+    .cont-he {
+        flex-direction: column;
+    }
 }

@@ -38,10 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($imagenTmpName, $imagenRuta);
 
         // Preparar la consulta SQL
-        $query = "INSERT INTO Producto (Nombre, Imagen, Descripcion, Precio, Enlace, Categoria, Stock) VALUES ('$nombre', '$imagenRuta', '$descripcion', '$precio', '$enlace', '$categoria', $stock)";
-
+        $query = "INSERT INTO producto (Nombre, Imagen, Descripcion, Precio, Enlace, Categoria, Stock) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        // Utilizar una declaración preparada para evitar problemas de seguridad
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ssssssi", $nombre, $imagenRuta, $descripcion, $precio, $enlace, $categoria, $stock);
+        
         // Ejecutar la consulta
-        $result = $conexion->query($query);
+        $result = $stmt->execute();
 
         // Verificar si la consulta fue exitosa
         if ($result) {
@@ -49,8 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: admin.php');
             die();
         } else {
-            echo "Error al guardar el producto: " . $conexion->error;
+            echo "Error al guardar el producto: " . $stmt->error;
         }
+        
+        // Cerrar la declaración preparada
+        $stmt->close();
     } else {
         echo "Error al subir la imagen.";
     }
@@ -69,36 +76,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <form action="nuevo_producto.php" method="post" enctype="multipart/form-data">
-            <h2>Crear Nuevo Producto</h2>
+            <h2 class="titulo-crear-producto">Crear Nuevo Producto</h2>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required><br>
+            <div class="cont-container">
+                <label class="text-cont" for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
 
-            <label for="imagen">Imagen:</label>
-            <input type="file" id="imagen" name="imagen" accept="image/*" required><br>
-            <img id="imagen-preview" alt="Imagen previa">
+            <div class="cont-container">
+                    <label class="text-cont" for="imagen">Imagen:</label>
+                <div class="cont-img">
+                    <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                    <img id="imagen-preview" alt="Imagen previa">
+                </div>
+            </div>
 
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required></textarea><br>
+            <div class="cont-container">
+                <label class="text-cont" for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
+            </div>
 
-            <label for="precio">Precio:</label>
-            <input type="text" id="precio" name="precio" required><br>
+            <div class="cont-container">
+                <label class="text-cont" for="precio">Precio:</label>
+                <input type="text" id="precio" name="precio" required>
+            </div>
 
-            <label for="stock">Stock:</label>
-            <input type="text" id="stock" name="stock" required><br>
+            <div class="cont-container">
+                <label class="text-cont" for="stock">Stock:</label>
+                <input type="text" id="stock" name="stock" required>
+            </div>
 
-            <label for="enlace">Enlace:</label>
-            <input type="text" id="enlace" name="enlace" required><br>
+            <div class="cont-container">
+                <label class="text-cont" for="enlace">Enlace:</label>
+                <input type="text" id="enlace" name="enlace" required>
+            </div>
 
-            <label for="categoria">Categoría:</label>
-            <select id="categoria" name="categoria" required>
-                <?php foreach ($categorias as $categoria) : ?>
-                    <option value="<?= $categoria ?>"><?= $categoria ?></option>
-                <?php endforeach; ?>
-            </select><br>
+            <div class="cont-container">
+                <label class="text-cont" for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria" required>
+                    <?php foreach ($categorias as $cat) : ?>
+                        <option value="<?= $cat ?>"><?= $cat ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-            <input type="submit" value="Guardar Producto">
-            <a href="admin.php" type="button" class="button">Salir</a>
+            <div class="botones">
+                <input class="btn-guardar" type="submit" value="Guardar Producto">
+                <a href="admin.php" type="button" class="button">Salir</a>
+            </div>
+
         </form>
     </div>
 

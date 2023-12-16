@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $idProducto = $_GET['id'];
 
     // Realizar una consulta para obtener la información del producto específico
-    $query = "SELECT * FROM Producto WHERE Id_Producto = $idProducto";
+    $query = "SELECT * FROM producto WHERE Id_Producto = $idProducto";
     $result = $conexion->query($query);
 
     // Verificar si la consulta fue exitosa
@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
             move_uploaded_file($imagenTmpName, $imagenNuevaRuta);
 
             // Actualizar la información del producto en la base de datos con la nueva imagen
-            $updateQuery = "UPDATE Producto SET Nombre = '$nombre', Imagen = '$imagenNuevaRuta', Descripcion = '$descripcion', Precio = '$precio', Enlace = '$enlace', Categoria = '$categoria', Stock = '$stock' WHERE Id_Producto = $idProducto";
+            $updateQuery = "UPDATE producto SET Nombre = '$nombre', Imagen = '$imagenNuevaRuta', Descripcion = '$descripcion', Precio = '$precio', Enlace = '$enlace', Categoria = '$categoria', Stock = '$stock' WHERE Id_Producto = $idProducto";
             $updateResult = $conexion->query($updateQuery);
 
             // Verificar si la actualización fue exitosa
@@ -71,7 +71,7 @@ if (isset($_GET['id'])) {
             }
         } else {
             // Si no se seleccionó una nueva imagen, actualizar la información del producto sin cambiar la imagen
-            $updateQuery = "UPDATE Producto SET Nombre = '$nombre', Descripcion = '$descripcion', Precio = '$precio', Enlace = '$enlace', Categoria = '$categoria', Stock = '$stock' WHERE Id_Producto = $idProducto";
+            $updateQuery = "UPDATE producto SET Nombre = '$nombre', Descripcion = '$descripcion', Precio = '$precio', Enlace = '$enlace', Categoria = '$categoria', Stock = '$stock' WHERE Id_Producto = $idProducto";
             $updateResult = $conexion->query($updateQuery);
 
             // Verificar si la actualización fue exitosa
@@ -99,31 +99,44 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../css/modificar_producto.css">
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <form id="formModificarProducto" action="modificar_producto.php?id=<?= $idProducto ?>" method="post" enctype="multipart/form-data">
-            <h2>Modificar Producto</h2>
+            <h2 class="titulo-modificar">Modificar Producto</h2>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" value="<?= $producto['Nombre'] ?>" required><br>
+            <div class="cont-modi">
+            <label class="contenido" for="nombre">Nombre:</label>
+            <input class="cont-contenido" type="text" id="nombre" name="nombre" value="<?= $producto['Nombre'] ?>" required><br>
+            </div>
 
-            <label for="imagen">Imagen:</label>
-            <input type="file" id="imagen" name="imagen" accept="image/*" onchange="previewImage()"><br>
+            <div class="cont-modi cont-modi-img">
+            <label for="imagen" class="custom-file-upload">Seleccionar Archivo</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*" onchange="previewImage()" style="display: none;">
             <img id="imagen-preview" alt="Imagen previa" src="<?= $producto['Imagen'] ?>">
+            </div>
 
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required><?= $producto['Descripcion'] ?></textarea><br>
+            <div class="cont-modi">
+            <label class="contenido" for="descripcion">Descripción:</label>
+            <textarea class="cont-contenido" id="descripcion" name="descripcion" required><?= $producto['Descripcion'] ?></textarea><br>
+            </div>
 
-            <label for="precio">Precio:</label>
-            <input type="text" id="precio" name="precio" value="<?= $producto['Precio'] ?>" required><br>
+            <div class="cont-modi">
+            <label class="contenido" for="precio">Precio:</label>
+            <input class="cont-contenido" type="text" id="precio" name="precio" value="<?= $producto['Precio'] ?>" required><br>
+            </div>
 
-            <label for="stock">Stock:</label>
-            <input type="text" id="stock" name="stock" value="<?= $producto['Stock'] ?>" required><br>
+            <div class="cont-modi">
+            <label class="contenido" for="stock">Stock:</label>
+            <input class="cont-contenido" type="text" id="stock" name="stock" value="<?= $producto['Stock'] ?>" required><br>
+            </div>
 
-            <label for="enlace">Enlace:</label>
-            <input type="text" id="enlace" name="enlace" value="<?= $producto['Enlace'] ?>" required><br>
+            <div class="cont-modi">
+            <label class="contenido" for="enlace">Enlace:</label>
+            <input class="cont-contenido" type="text" id="enlace" name="enlace" value="<?= $producto['Enlace'] ?>" required><br>
+            </div>
 
-            <label for="categoria">Categoría:</label>
-            <select id="categoria" name="categoria" required>
+            <div class="cont-modi">
+            <label class="contenido" for="categoria">Categoría:</label>
+            <select class="cont-contenido" id="categoria" name="categoria" required>
                 <?php
                 $categorias = array("Placa", "Procesador", "Case");
                 foreach ($categorias as $categoriaOption) {
@@ -131,9 +144,12 @@ if (isset($_GET['id'])) {
                     echo "<option value='$categoriaOption' $selected>$categoriaOption</option>";
                 }
                 ?>
-            </select><br>
+            </select>
+            </div>
 
-            <input type="submit" value="Actualizar Producto">
+            <br>
+
+            <input class="btn-actualizar" type="submit" value="Actualizar Producto">
             <a href="admin.php" type="button" class="button">Salir</a>
         </form>
     </div>

@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -53,4 +53,157 @@ button {
 
 .button:hover {
     background-color: #0056b3;
+} */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+/* Estilos para el formulario de modificar producto */
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    padding: 50px;
+    margin-top: 29px;
+    margin-bottom: 101px;
+    padding-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"],
+.button {
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.button {
+    background-color: #f44336;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.button:hover,
+input[type="submit"]:hover {
+    background-color: #000000;
+}
+
+#imagen-preview {
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 16px;
+}
+
+/* Ocultar el input de tipo archivo original */
+input[type="file"] {
+    display: none;
+}
+
+/* Estilizar el botón personalizado */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #0e5612;
+
+}
+
+.cont-modi {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cont-modi-img{
+    align-items: center;
+}
+
+#descripcion {
+    height: 200px;
+}
+
+#imagen-preview {
+    align-items: center;
+}
+
+.contenido {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.titulo-modificar {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    background-color: rgb(69, 226, 224);
+    padding: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+    margin-top: 0;
+}
+
+.btn-actualizar {
+    margin-bottom: 20px;
+}
+
+/* Estilos adicionales para el diseño responsivo */
+
+@media (max-width: 1000px) {
+    .container {
+        width: 80%
+    }
+    .contenido {
+        font-size: 175%;
+    }
+    #imagen-preview {
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+    }
+    .custom-file-upload {
+        font-size: 25px;
+    }
+    .cont-contenido {
+        font-size: 35px;
+    }
+    input[type="submit"], .button {
+        font-size: 30px;
+    }
 }

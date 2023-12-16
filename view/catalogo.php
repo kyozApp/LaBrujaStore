@@ -22,7 +22,7 @@
         <div id="header-botones">
             <div class="botones-cont btn-acion"><a href="../index.php">Cotización</a></div>
             <div class="dropdown botones-cont btn-acion">
-                <a href="#">Catalogo</a>
+                <a href="catalogo.php">Catalogo</a>
                 <!-- Lista de categorías -->
                 <div class="categorias-lista">
                     <!-- Aquí se cargarían dinámicamente las categorías desde la base de datos -->
@@ -50,10 +50,10 @@
                 <img id="icon-tres-lineas" src="../img/icon/tres-lineas.png" alt="Icono de menu 3 lineas">
 
                 <div class="opciones-lista">
-                    <a class="cont-lista" href="#">Cotización</a>
+                    <a class="cont-lista" href="../index.php">Cotización</a>
 
                     <div class="cont-sub-categorias">
-                        <a class="cont-lista" href="#">Categorías</a>
+                        <a class="cont-lista" href="../view/catalogo.php">Categorías</a>
                         <div class="opciones-sub-categoria">
                             <a class="cont-lista" href="#">Procesador</a>
                             <a class="cont-lista" href="#">Placa</a>
@@ -72,24 +72,68 @@
                             <a class="cont-lista" href="#">Combos</a>
                         </div>
                     </div>
-                    <a class="cont-lista" href="view/login.php">Iniciar Sesion</a>
+                    <a class="cont-lista" href="../view/login.php">Iniciar Sesion</a>
                 </div>
             </div>
 
             <div class="botones-cont div-formulario">
                 <!-- Barra de búsqueda -->
-                <form class="-segundo" action="/ruta_de_busqueda" method="GET">
-                    <input class="buscar-text" type="text" name="busqueda" placeholder="Buscar...">
-                    <button class="buscar-boton" type="submit">Buscar</button>
+                <form class="-segundo" action="#" method="GET" onsubmit="return false;">
+                    <input class="buscar-text" type="text" id="searchInput" placeholder="Buscar..."> <!-- Cambiado el ID a 'searchInput' -->
+                    <button class="buscar-boton" type="button" onclick="buscarProductos()">Buscar</button> <!-- Cambiado el tipo de botón a 'button' -->
                 </form>
             </div>
         </div>
 
+        <!-- Script JavaScript para buscar producto -->
+        <script>
+            function buscarProductos() {
+                var input = document.getElementById('searchInput');
+                var filter = input.value.toUpperCase();
+
+                var categories = document.querySelectorAll('.titulo-categoria');
+
+                categories.forEach(function(category) {
+                    var categoryName = category.textContent.toUpperCase();
+                    var categoryHasMatchingProduct = false;
+
+                    var cards = category.nextElementSibling.querySelectorAll('.card-body');
+
+                    cards.forEach(function(card) {
+                        var cardTitle = card.querySelector('.card-title');
+                        var txtValue = cardTitle.textContent || cardTitle.innerText;
+
+                        if (txtValue.toUpperCase().indexOf(filter) > -1 && categoryHasMatchingProduct === false) {
+                            categoryHasMatchingProduct = true;
+                        }
+                    });
+
+                    if (categoryHasMatchingProduct) {
+                        category.style.display = '';
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+
+                var cards = document.querySelectorAll('.card-body');
+
+                cards.forEach(function(card) {
+                    var title = card.querySelector('.card-title');
+                    var txtValue = title.textContent || title.innerText;
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+        
         <!-- Logo la derecha -->
         <div id="header-img-logo-right">
             <img id="header-cont-img-logo" src="../img/labrujastore.png" alt="Logo de la empresa">
         </div>
-        <!-- TIENES QUE AL DAR CLICK EN LA LUPA QUE SE ABRA EL BUSCADOR -->
     </header>
 
     <main class="body-cont">
@@ -104,7 +148,7 @@
         // Iterar sobre las categorías ordenadas
         foreach ($categoriasOrdenadas as $categoria) {
             // Realizar una consulta para obtener la información de productos de la categoría actual
-            $query = "SELECT Nombre, Imagen, Precio, Stock, Descripcion, Enlace FROM Producto WHERE Categoria = '$categoria' ORDER BY Nombre";
+            $query = "SELECT Nombre, Imagen, Precio, Stock, Descripcion, Enlace FROM producto WHERE Categoria = '$categoria' ORDER BY Nombre";
             $result = $conexion->query($query);
 
             // Verificar si la consulta fue exitosa
@@ -139,13 +183,6 @@
 
                     // Incrementar el contador de productos en la fila
                     $productosEnFila++;
-
-                    // Cerrar la fila y abrir una nueva si se alcanza el límite de productos por fila
-                    if ($productosEnFila == 4) {
-                        echo '</div>'; // Cerrar la fila actual
-                        echo '<div class="product-row">'; // Abrir una nueva fila
-                        $productosEnFila = 0; // Reiniciar el contador
-                    }
                 }
 
                 // Cerrar la fila para la categoría actual (puede haber menos de 4 productos en la última fila)

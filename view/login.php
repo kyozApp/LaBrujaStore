@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contrasena = $_POST['contrasena'];
 
     // Verificar las credenciales en la base de datos
-    $consulta = "SELECT * FROM Usuario WHERE Usuario = '$usuario' AND Contraseña = '$contrasena'";
+    $consulta = "SELECT * FROM usuario WHERE Usuario = '$usuario' AND Contraseña = '$contrasena'";
     $resultado = $conexion->query($consulta);
 
     if ($resultado->num_rows > 0) {

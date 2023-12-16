@@ -12,7 +12,7 @@ if (!isset($_SESSION['id_usuario'])) {
 include('../conexiondb/conexion.php');
 
 // Realizar una consulta para obtener la información de productos
-$query = "SELECT * FROM Producto";
+$query = "SELECT * FROM producto";
 $result = $conexion->query($query);
 
 
@@ -35,21 +35,22 @@ if (!$result) {
 </head>
 
 <body>
-    <h1>Bienvenido <?= $_SESSION['usuario'] ?></h1>
-    <a href="../config/cerrar_sesion.php">Cerrar sesión</a>
-
+    <div class="cont-he">
+        <h1  class="main-titulo">BIENVENIDO <?= $_SESSION['usuario'] ?></h1>
+        <a class="btn-salir" href="../config/cerrar_sesion.php">Cerrar sesión</a>
+    </div>
 
     <table>
-        <h1>Tabla de catalogo</h1>
+        <h1 class="titulo-tabla">Tabla de catalogo</h1>
         <p><a class="button" href="nuevo_producto.php">Crear</a></p>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Imagen</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Enlace</th>
-            <th>Categoria</th>
+            <th class="desaparecer">Descripción</th>
+            <th class="desaparecer-2">Precio</th>
+            <th class="desaparecer">Enlace</th>
+            <th class="desaparecer-2">Categoria</th>
             <th>Stock</th>
             <td></td>
             <td></td>
@@ -59,10 +60,10 @@ if (!$result) {
                 <td><?= $row['Id_Producto']; ?></td>
                 <td><?= $row['Nombre']; ?></td>
                 <td><img src="<?= $row['Imagen']; ?>" alt="Imagen de <?= $row['Nombre']; ?>" style="max-width: 100px;"></td>
-                <td><?= $row['Descripcion']; ?></td>
-                <td><?= $row['Precio']; ?></td>
-                <td><?= $row['Enlace']; ?></td>
-                <td><?= $row['Categoria']; ?></td>
+                <td class="desaparecer"><?= $row['Descripcion']; ?></td>
+                <td class="desaparecer-2"><?= $row['Precio']; ?></td>
+                <td class="desaparecer"><?= $row['Enlace']; ?></td>
+                <td class="desaparecer-2"><?= $row['Categoria']; ?></td>
                 <td><?= $row['Stock']; ?></td>
                 <!-- Se utilizará más adelante para indicar si se quiere modificar o eliminar el registro -->
                 <td><a href="modificar_producto.php?id=<?= $row['Id_Producto'] ?>"><i class="fas fa-pen"></i></a></td>

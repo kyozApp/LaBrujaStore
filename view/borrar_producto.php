@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $idProducto = $_GET['id'];
 
     // Realizar una consulta para obtener la información del producto específico
-    $query = "SELECT * FROM Producto WHERE Id_Producto = $idProducto";
+    $query = "SELECT * FROM producto WHERE Id_Producto = $idProducto";
     $result = $conexion->query($query);
 
     // Verificar si la consulta fue exitosa
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
         unlink($imagenRuta);
 
         // Eliminar el producto de la base de datos
-        $deleteQuery = "DELETE FROM Producto WHERE Id_Producto = $idProducto";
+        $deleteQuery = "DELETE FROM producto WHERE Id_Producto = $idProducto";
         $deleteResult = $conexion->query($deleteQuery);
 
         // Verificar si la eliminación fue exitosa
